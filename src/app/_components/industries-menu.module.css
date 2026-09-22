@@ -102,9 +102,12 @@
   justify-content: space-between;
   gap: 5px;
   min-height: 50px;
-  padding: 7px 0;
+  padding: 7px 9px;
   border-bottom: 1px solid #e0eaf5;
+  border-radius: 4px;
   color: #092b59;
+  transform: translateZ(0);
+  transition: background-color 180ms ease, box-shadow 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
 .links a:last-child {
@@ -133,12 +136,27 @@
   height: 13px;
   flex: none;
   color: #0751aa;
+  transition: color 180ms ease, transform 180ms ease;
 }
 
 .links a:hover,
 .links a:focus-visible {
-  color: #0964c2;
-  background: #f4f9ff;
+  color: #fff;
+  background: #0d4c9e;
+  box-shadow: 0 8px 18px #0d4c9e2e;
+  transform: scale(1.018);
+}
+
+.links a:hover small,
+.links a:focus-visible small,
+.links a:hover > svg,
+.links a:focus-visible > svg {
+  color: #dceeff;
+}
+
+.links a:hover > svg,
+.links a:focus-visible > svg {
+  transform: translateX(2px);
 }
 
 .result {
@@ -433,10 +451,28 @@
   height: 20px;
 }
 
-.links a:hover,
-.links a:focus-visible,
-.quickLinks a:hover {
-  background: transparent;
-  color: #0964c2;
+.quickLinks a,
+.contact {
+  transition: background-color 180ms ease, box-shadow 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.quickLinks a:hover,
+.quickLinks a:focus-visible {
+  background: #0d4c9e;
+  color: #fff;
+  box-shadow: 0 8px 18px #0d4c9e2e;
+  transform: scale(1.018);
+}
+
+.quickLinks a:hover small,
+.quickLinks a:focus-visible small,
+.quickLinks a:hover > svg,
+.quickLinks a:focus-visible > svg {
+  color: #dceeff;
+}
+
+.quickLinks a:hover > svg:last-child,
+.quickLinks a:focus-visible > svg:last-child {
+  transform: translateX(2px);
 }
 
