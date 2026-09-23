@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Header from "./_components/header";
 import Footer from "./_components/footer";
+import PageTransition from "./_components/page-transition";
 import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.astronisglobal.com"),
@@ -27,7 +28,9 @@ export default function RootLayout({
           Skip to content
         </a>
         <Header />
-        <main id="main-content">{children}</main>
+        <main id="main-content">
+          <PageTransition>{children}</PageTransition>
+        </main>
         <Footer />
       </body>
     </html>

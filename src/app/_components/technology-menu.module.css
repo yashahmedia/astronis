@@ -28,13 +28,16 @@
 .heading > svg { flex: none; width: 39px; height: 39px; color: #0759ff; stroke-width: 1.5; }
 .heading > svg:last-child { width: 16px; height: 16px; }
 .links { display: grid; padding-top: 4px; }
-.links a { display: grid; grid-template-columns: minmax(0, 1fr) 14px; align-items: center; gap: 8px; min-height: 70px; padding: 10px 0; border-bottom: 1px solid #dbe7f6; color: #15366f; }
+.links a { display: grid; grid-template-columns: minmax(0, 1fr) 14px; align-items: center; gap: 8px; min-height: 70px; padding: 10px 9px; border-bottom: 1px solid #dbe7f6; border-radius: 4px; color: #15366f; transform: translateZ(0); transition: background-color 180ms ease, box-shadow 180ms ease, color 180ms ease, transform 180ms ease; }
 .links a:last-child { border-bottom: 0; }
 .links a > span { display: grid; gap: 5px; min-width: 0; }
 .links strong { font: 700 14px/1.25 "Segoe UI", Arial, sans-serif; }
 .links small { color: #536789; font: 400 12px/1.35 "Segoe UI", Arial, sans-serif; }
-.links a > svg { width: 14px; height: 14px; color: #0759ff; }
-.links a:hover, .heading:hover { color: #0759ff; }
+.links a > svg { width: 14px; height: 14px; color: #0759ff; transition: color 180ms ease, transform 180ms ease; }
+.links a:hover, .links a:focus-visible { color: #fff; background: #0d4c9e; box-shadow: 0 8px 18px #0d4c9e2e; transform: scale(1.018); }
+.links a:hover small, .links a:focus-visible small, .links a:hover > svg, .links a:focus-visible > svg { color: #dceeff; }
+.links a:hover > svg, .links a:focus-visible > svg { transform: translateX(2px); }
+.heading:hover { color: #0759ff; }
 .menu a:focus-visible, .searchField:focus-within { outline: 2px solid #0759ff; outline-offset: 3px; border-radius: 2px; }
 .feature { display: flex; flex-direction: column; justify-content: space-between; min-height: 326px; padding: 34px 28px 14px; background: linear-gradient(125deg, #d8effff5, #cbe9ff91 50%, #3c88c324), url('/images/india-presence/mumbai.jpg') center/cover; }
 .feature p { font-size: 14px; line-height: 1.5; letter-spacing: 1.7px; text-transform: uppercase; }

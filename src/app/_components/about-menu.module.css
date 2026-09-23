@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 30px;
-  padding: 25px 33px 18px;
+  padding: 20px 29px 14px;
 }
 .eyebrow { display: block; color: #173c73; font: 700 12px/1.4 Arial, sans-serif; letter-spacing: 2.6px; text-transform: uppercase; }
 .intro h2 { margin: 6px 0 2px; font: 500 clamp(27px, 2.35vw, 40px)/1.12 Georgia, "Times New Roman", serif; }
@@ -30,19 +30,21 @@
 .intro > a svg { width: 19px; height: 19px; }
 .intro > a small { color: #526785; font: 14px/1.25 Georgia, "Times New Roman", serif; }
 .body { display: grid; grid-template-columns: minmax(0, 2.27fr) minmax(335px, 1fr); min-width: 0; }
-.columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); min-width: 0; padding: 15px 18px 25px 19px; }
+.columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); min-width: 0; padding: 10px 18px 16px 19px; }
 .column { display: flex; flex-direction: column; min-width: 0; padding: 0 15px; border-right: 1px solid #d4e2f1; }
 .column:last-child { border-right: 0; }
-.item { display: grid; grid-template-columns: 55px minmax(0, 1fr) 12px; align-items: center; gap: 15px; flex: 1; min-height: 104px; padding: 10px 0; border-bottom: 1px solid #b9d0e9; }
+.item { display: grid; grid-template-columns: 45px minmax(0, 1fr) 12px; align-items: center; gap: 10px; flex: 1; min-height: 78px; padding: 7px 9px; border-bottom: 1px solid #b9d0e9; border-radius: 4px; transform: translateZ(0); transition: background-color 180ms ease, box-shadow 180ms ease, color 180ms ease, transform 180ms ease; }
 .item:last-child { border-bottom: 0; }
-.item:hover, .item:focus-visible { color: #0755ab; background: transparent; }
-.item > svg { width: 28px; height: 28px; color: #103d82; stroke-width: 1.35; }
+.item:hover, .item:focus-visible { color: #fff; background: #0d4c9e; box-shadow: 0 8px 18px #0d4c9e2e; transform: scale(1.018); }
+.item > svg { width: 28px; height: 28px; color: #103d82; stroke-width: 1.35; transition: color 180ms ease; }
 .item > span:nth-child(2) { display: grid; gap: 3px; }
 .item strong { color: inherit; font: 500 14px/1.25 "Segoe UI", Arial, sans-serif; }
 .item small { color: #526785; font: clamp(12px, .95vw, 15px)/1.28 "Segoe UI", Arial, sans-serif; }
-.chevron { color: #0a468c; font: 29px/1 Georgia, serif; }
-.feature { display: grid; grid-template-rows: minmax(280px, 1fr) auto; min-width: 0; background: #e9f4ff; }
-.featureVisual { position: relative; isolation: isolate; overflow: hidden; min-height: 280px; padding: 32px 32px 28px; background: linear-gradient(90deg, #d5e9fb 0%, #d5e9fbd9 40%, #d5e9fb00 72%), url("/about-menu-global-presence.png") 58% center / cover no-repeat; }
+.item:hover small, .item:focus-visible small, .item:hover > svg, .item:focus-visible > svg, .item:hover .chevron, .item:focus-visible .chevron { color: #dceeff; }
+.chevron { color: #0a468c; font: 29px/1 Georgia, serif; transition: color 180ms ease, transform 180ms ease; }
+.item:hover .chevron, .item:focus-visible .chevron { transform: translateX(2px); }
+.feature { display: grid; grid-template-rows: minmax(230px, 1fr) auto; min-width: 0; background: #e9f4ff; }
+.featureVisual { position: relative; isolation: isolate; overflow: hidden; min-height: 230px; padding: 25px 26px 22px; background: linear-gradient(90deg, #d5e9fb 0%, #d5e9fbd9 40%, #d5e9fb00 72%), url("/about-menu-global-presence.png") 58% center / cover no-repeat; }
 .featureVisual .eyebrow { position: relative; z-index: 1; }
 .rule { display: block; width: 48px; height: 1px; margin: 18px 0 21px; background: #123d78; }
 .feature h3 { position: relative; z-index: 1; color: #123369; font: 400 clamp(26px, 2.2vw, 37px)/1.08 Georgia, "Times New Roman", serif; }

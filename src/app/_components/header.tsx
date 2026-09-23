@@ -123,6 +123,9 @@ export default function Header() {
       document.removeEventListener("keydown", escape);
     };
   }, []);
+  useEffect(() => {
+    close();
+  }, [path]);
   function close() {
     setMobile(false);
     setOpen(null);

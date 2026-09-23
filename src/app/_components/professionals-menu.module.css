@@ -9,12 +9,14 @@
 .tagline{min-height:37px;margin-top:7px;color:#456890;font-size:10px;font-weight:700;letter-spacing:.08em;line-height:1.45;text-transform:uppercase}
 .rule{display:block;width:44px;height:2px;background:#1555a7;margin:13px 0 16px}
 .links{display:grid;gap:2px}
-.links a{display:flex;align-items:flex-start;justify-content:space-between;gap:7px;min-height:58px;padding:7px 2px;border-radius:4px;color:#0b376f;transition:background .2s,transform .2s,color .2s}
+.links a{display:flex;align-items:flex-start;justify-content:space-between;gap:7px;min-height:58px;padding:7px 9px;border-radius:4px;color:#0b376f;transform:translateZ(0);transition:background-color .2s,box-shadow .2s,color .2s,transform .2s}
 .links a>span{display:grid;gap:3px;min-width:0}
 .links strong{font-size:14px;font-weight:600;line-height:1.25}
 .links small{font-size:11px;font-weight:400;line-height:1.35;color:#58718c;white-space:normal}
-.links a>svg{flex:none;width:20px;height:20px;margin-top:2px;color:#1555a7}
-.links a:hover,.links a:focus-visible{color:#0a5cc3;background:transparent}
+.links a>svg{flex:none;width:20px;height:20px;margin-top:2px;color:#1555a7;transition:color .2s,transform .2s}
+.links a:hover,.links a:focus-visible{color:#fff;background:#0d4c9e;box-shadow:0 8px 18px #0d4c9e2e;transform:scale(1.018)}
+.links a:hover small,.links a:focus-visible small,.links a:hover>svg,.links a:focus-visible>svg{color:#dceeff}
+.links a:hover>svg,.links a:focus-visible>svg{transform:translateX(2px)}
 .collaborate{display:grid;grid-template-columns:31px 1fr 16px;align-items:center;gap:9px;margin-top:14px;padding:12px 10px;border:1px solid #dce9f8;border-radius:5px;background:#eef6ff;color:#0b376f;transition:background .2s,transform .2s}
 .collaborate:hover{background:#e1f0ff;transform:translateY(-2px)}
 .collaborate>svg:first-child{width:29px;height:29px}.collaborate>svg:last-child{width:15px;height:15px}
@@ -36,4 +38,3 @@
 
 .links strong { font-size: 14px; }
 .links a > svg { width: 20px; height: 20px; }
-.links a:hover, .links a:focus-visible { background: transparent; color: #0a5cc3; }
