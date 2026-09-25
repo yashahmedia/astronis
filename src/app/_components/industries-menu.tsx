@@ -7,10 +7,10 @@ import Icon from "./icon";
 import styles from "./industries-menu.module.css";
 
 const groups = [
-  { title: "Financial & Professional", caption: "Capital. Trust. Expertise.", icon: "chart", names: ["Financial Services", "FinTech & Digital Finance", "Professional & Business Services", "Real Estate & Construction"] },
-  { title: "Technology & Innovation", caption: "Ideas. Platforms. Transformation.", icon: "bulb", names: ["IT & ITES", "Artificial Intelligence", "Startups", "Media & Entertainment", "Telecommunications"] },
-  { title: "Industrial & Infrastructure", caption: "Build. Operate. Sustain.", icon: "building", names: ["Manufacturing", "Automotive & Mobility", "Infrastructure", "Renewable Energy", "Aviation, Aerospace & Defence", "Logistics", "Mining, Metals & Natural Resources", "Agriculture & Agri-Business"] },
-  { title: "Consumer & People", caption: "People. Markets. Opportunities.", icon: "people", names: ["Retail & Consumer", "E-Commerce", "Healthcare & Pharma", "Education", "Hospitality", "Textiles, Apparel & Lifestyle", "Government & Public Sector"] },
+  { title: "Financial & Professional", caption: "Capital. Trust. Expertise.", icon: "chart", names: ["Financial Services", "FinTech & Digital Finance", "Professional & Business Services", "Real Estate & Construction", "Aviation, Aerospace & Defence"] },
+  { title: "Technology & Innovation", caption: "Ideas. Platforms. Transformation.", icon: "bulb", names: ["IT & ITES", "Artificial Intelligence", "Startups", "Media & Entertainment", "Telecommunications", "Education", "Renewable Energy"] },
+  { title: "Industrial & Infrastructure", caption: "Build. Operate. Sustain.", icon: "building", names: ["Manufacturing", "Automotive & Mobility", "Infrastructure", "Logistics", "Mining, Metals & Natural Resources", "Agriculture & Agri-Business"] },
+  { title: "Consumer & People", caption: "People. Markets. Opportunities.", icon: "people", names: ["Retail & Consumer", "E-Commerce", "Healthcare & Pharma", "Hospitality", "Textiles, Apparel & Lifestyle", "Government & Public Sector"] },
 ] as const;
 
 const descriptions: Record<string, string> = {
@@ -48,11 +48,7 @@ export default function IndustriesMenu({ id, onNavigate }: { id: string; onNavig
 
   return <div className={`mega-menu ${styles.menu}`} id={id}>
     <div className={styles.main}>
-      <div className={styles.heading}>
-        <h2>Our Industries</h2>
-        <p>Sector-focused insight. Integrated advisory capability.</p>
-        <Link href="/industries" onClick={onNavigate}>Explore All Industries <Icon name="arrow" /></Link>
-      </div>
+      
       <div className={styles.columns}>
         {groups.map((group) => <section className={styles.column} key={group.title} aria-label={group.title}>
           <div className={styles.groupHeading}><Icon name={group.icon} /><div><h3>{group.title}</h3><p>{group.caption}</p></div></div>

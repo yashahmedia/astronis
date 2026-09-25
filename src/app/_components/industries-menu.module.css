@@ -1,10 +1,19 @@
 .menu {
   grid-template-columns: minmax(0, 1fr) 285px !important;
-  max-height: min(82vh, 760px);
+  max-height: none !important;
+  overflow: visible !important;
   border-top: 1px solid #dce8f4;
   box-shadow: 0 22px 48px #071e3d33;
   color: #0b2d5d;
   font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.menu a:focus-visible,
+.menu input:focus-visible,
+.menu button:focus-visible,
+.menu :focus-visible {
+  outline: none;
+  box-shadow: none;
 }
 
 .main {
@@ -240,6 +249,12 @@
   background: white;
   color: #0b2d5d;
   font: 12px Arial, sans-serif;
+}
+
+.search input:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: #c6daee;
 }
 
 .search > svg {
