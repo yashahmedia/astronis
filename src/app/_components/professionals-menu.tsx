@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "./asset-image";
 import Icon from "./icon";
 import styles from "./professionals-menu.module.css";
+import { isRouteActive } from "./navigation-state";
 
 const columns = [
   {
@@ -55,6 +57,8 @@ const columns = [
 ] as const;
 
 export default function ProfessionalsMenu({ id, onNavigate }: { id: string; onNavigate: () => void }) {
+  const pathname = usePathname();
+
   return <div className={`mega-menu ${styles.menu}`} id={id}>
     <div className={styles.columns}>
       {columns.map(column => <section className={styles.column} key={column.title} aria-label={column.title}>
@@ -64,7 +68,7 @@ export default function ProfessionalsMenu({ id, onNavigate }: { id: string; onNa
         </div>
         <p className={styles.tagline}>{column.tagline}</p>
         <span className={styles.rule} />
-        <div className={styles.links}>{column.links.map(([title, description, href]) => <Link href={href} onClick={onNavigate} key={title}>
+        <div className={styles.links}>{column.links.map(([title, description, href]) => <Link href={href} onClick={onNavigate} key={title} className={isRouteActive(pathname, href) ? "active-submenu-item" : undefined}>
           <span><strong>{title}</strong><small>{description}</small></span><Icon name="arrow" />
         </Link>)}</div>
         {column.title === "Find a Professional" && <div className={styles.columnFooter}>

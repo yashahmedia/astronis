@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Icon from "./icon";
 import styles from "./technology-menu.module.css";
 import { digitalBusinessPath, digitalSolutions } from "@/content/digital-solutions";
 import { regtechPath, regtechSolutions } from "@/content/regtech-solutions";
 import { legalTechnologyPath, legalTechnologySolutions } from "@/content/legal-technology";
 import { dataAiPath, dataAiSolutions } from "@/content/data-ai-solutions";
+import { isRouteActive } from "./navigation-state";
 
 const columns = [
   { title: "Digital Business Solutions", icon: "laptop", links: ["Digital Transformation", "Business Process Digitisation", "Digital Operating Models", "Workflow Solutions", "Client & Enterprise Portals", "Cloud & Collaboration Solutions", "Cybersecurity Readiness"] },
@@ -87,17 +88,22 @@ function solutionHref(title: string) {
 }
 
 export default function TechnologyMenu({ id, onNavigate }: { id: string; onNavigate: () => void }) {
+  const pathname = usePathname();
+
   return (
     <div className={`mega-menu ${styles.menu}`} id={id}>
       <div className={styles.main}>
         <div className={styles.columns}>
           {columns.map((column) => <section className={styles.column} key={column.title} aria-label={column.title}>
-            <Link className={styles.heading} href={solutionHref(column.title)} onClick={onNavigate}><Icon name={column.icon} /><h3>{column.title}</h3><Icon name="arrow" /></Link>
-            <div className={styles.links}>{column.links.map((title) => <Link href={solutionHref(title)} key={title} onClick={onNavigate}><span><strong>{title}</strong><small>{descriptions[title]}</small></span><Icon name="arrow" /></Link>)}</div>
+            <Link className={`${styles.heading} ${isRouteActive(pathname, solutionHref(column.title)) ? "active-submenu-item" : ""}`.trim()} href={solutionHref(column.title)} onClick={onNavigate}><Icon name={column.icon} /><h3>{column.title}</h3><Icon name="arrow" /></Link>
+            <div className={styles.links}>{column.links.map((title) => {
+              const href = solutionHref(title);
+              return <Link href={href} key={title} onClick={onNavigate} className={isRouteActive(pathname, href) ? "active-submenu-item" : undefined}><span><strong>{title}</strong><small>{descriptions[title]}</small></span><Icon name="arrow" /></Link>;
+            })}</div>
           </section>)}
           <section className={styles.column} aria-label="Explore technology solutions">
-            <Link className={styles.heading} href="/technology-and-digital-solutions" onClick={onNavigate}><Icon name="compass" /><h3>Explore</h3><Icon name="arrow" /></Link>
-            <div className={styles.links}>{explore.map(([title, href]) => <Link href={href} key={title} onClick={onNavigate}><span><strong>{title}</strong><small>{descriptions[title]}</small></span><Icon name="arrow" /></Link>)}</div>
+            <Link className={`${styles.heading} ${isRouteActive(pathname, "/technology-and-digital-solutions") ? "active-submenu-item" : ""}`.trim()} href="/technology-and-digital-solutions" onClick={onNavigate}><Icon name="compass" /><h3>Explore</h3><Icon name="arrow" /></Link>
+            <div className={styles.links}>{explore.map(([title, href]) => <Link href={href} key={title} onClick={onNavigate} className={isRouteActive(pathname, href) ? "active-submenu-item" : undefined}><span><strong>{title}</strong><small>{descriptions[title]}</small></span><Icon name="arrow" /></Link>)}</div>
           </section>
         </div>
         <aside className={styles.feature}>

@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { slugify } from "@/content/site";
 import Icon from "./icon";
 import styles from "./insights-menu.module.css";
+import { isRouteActive } from "./navigation-state";
 
 const columns = [
   {
@@ -56,15 +58,20 @@ function hrefFor(title: string) {
 }
 
 export default function InsightsMenu({ id, onNavigate }: { id: string; onNavigate: () => void }) {
+  const pathname = usePathname();
+
   return <div className={`mega-menu ${styles.menu}`} id={id}>
     
     <div className={styles.main}>
       <div className={styles.columns}>{columns.map((column) => <section className={styles.column} key={column.title} aria-label={column.title}>
         <div className={styles.heading}><Icon name={column.icon} /><span><h3>{column.title}</h3><p>{column.tagline}</p></span></div>
-        <div className={styles.links}>{column.links.map(([icon, title, description]) => <Link href={hrefFor(title)} onClick={onNavigate} key={title}><Icon name={icon} /><span><strong>{title}</strong><small>{description}</small></span><span className={styles.chevron} aria-hidden="true">›</span></Link>)}</div>
+        <div className={styles.links}>{column.links.map(([icon, title, description]) => {
+          const href = hrefFor(title);
+          return <Link href={href} onClick={onNavigate} key={title} className={isRouteActive(pathname, href) ? "active-submenu-item" : undefined}><Icon name={icon} /><span><strong>{title}</strong><small>{description}</small></span><span className={styles.chevron} aria-hidden="true">›</span></Link>;
+        })}</div>
       </section>)}</div>
-      <aside className={styles.feature}><div className={styles.featureImage} role="img" aria-label="Legal and business insights workspace" /><div className={styles.featureCopy}><span className={styles.eyebrow}>Knowledge that empowers.</span><h2>From Insight<br />to Impact.</h2><Link href="/insights" onClick={onNavigate}>Explore All Insights <Icon name="arrow" /></Link></div></aside>
+      <aside className={styles.feature}><div className={styles.featureImage} role="img" aria-label="Legal and business insights workspace" /><div className={styles.featureCopy}><span className={styles.eyebrow}>Knowledge that empowers.</span><h2>From Insight<br />to Impact.</h2><Link href="/insights" onClick={onNavigate} className={isRouteActive(pathname, "/insights") ? "active-submenu-item" : undefined}>Explore All Insights <Icon name="arrow" /></Link></div></aside>
     </div>
-    <div className={styles.footer}>{footerLinks.map(([icon, title, description, href]) => <Link href={href} onClick={onNavigate} key={title}><Icon name={icon} /><span><strong>{title}</strong><small>{description}</small></span><span className={styles.chevron} aria-hidden="true">›</span></Link>)}</div>
+    <div className={styles.footer}>{footerLinks.map(([icon, title, description, href]) => <Link href={href} onClick={onNavigate} key={title} className={isRouteActive(pathname, href) ? "active-submenu-item" : undefined}><Icon name={icon} /><span><strong>{title}</strong><small>{description}</small></span><span className={styles.chevron} aria-hidden="true">›</span></Link>)}</div>
   </div>;
 }

@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { industries } from "@/content/site";
 import Icon from "./icon";
 import styles from "./industries-menu.module.css";
+import { isRouteActive } from "./navigation-state";
 
 const groups = [
   { title: "Financial & Professional", caption: "Capital. Trust. Expertise.", icon: "chart", names: ["Financial Services", "FinTech & Digital Finance", "Professional & Business Services", "Real Estate & Construction", "Aviation, Aerospace & Defence"] },
@@ -42,6 +44,7 @@ const descriptions: Record<string, string> = {
 
 export default function IndustriesMenu({ id, onNavigate }: { id: string; onNavigate: () => void }) {
   const [query, setQuery] = useState("");
+  const pathname = usePathname();
   const term = query.trim().toLowerCase();
   const matches = (name: string) => !term || `${name} ${descriptions[name]}`.toLowerCase().includes(term);
   const resultCount = industries.filter((industry) => matches(industry.title)).length;
@@ -56,7 +59,8 @@ export default function IndustriesMenu({ id, onNavigate }: { id: string; onNavig
             {group.names.filter(matches).map((name) => {
               const industry = industries.find((item) => item.title === name);
               if (!industry) return null;
-              return <Link href={`/industries/${industry.slug}`} key={industry.slug} onClick={onNavigate}>
+              const href = `/industries/${industry.slug}`;
+              return <Link href={href} key={industry.slug} onClick={onNavigate} className={isRouteActive(pathname, href) ? "active-submenu-item" : undefined}>
                 <span><strong>{name}</strong><small>{descriptions[name]}</small></span><Icon name="arrow" />
               </Link>;
             })}
@@ -76,10 +80,10 @@ export default function IndustriesMenu({ id, onNavigate }: { id: string; onNavig
       <p>Search industries, sectors or keywords</p>
       <div className={styles.search}><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search industries or sectors..." aria-label="Search industries in menu" /><Icon name="search" /></div>
       <div className={styles.quickLinks}>
-        <Link href="/industries" onClick={onNavigate}><Icon name="globe" /><span><strong>Explore All Industries</strong><small>View complete industry directory</small></span><Icon name="arrow" /></Link>
-        <Link href="/insights" onClick={onNavigate}><Icon name="file" /><span><strong>Industry Insights</strong><small>Articles, guides and publications</small></span><Icon name="arrow" /></Link>
-        <Link href="/insights/legal-updates" onClick={onNavigate}><Icon name="document" /><span><strong>Regulatory Updates</strong><small>Latest developments by sector</small></span><Icon name="arrow" /></Link>
-        <Link href="/professionals" onClick={onNavigate}><Icon name="search" /><span><strong>Find a Professional</strong><small>Connect with our experts</small></span><Icon name="arrow" /></Link>
+        <Link href="/industries" onClick={onNavigate} className={isRouteActive(pathname, "/industries") ? "active-submenu-item" : undefined}><Icon name="globe" /><span><strong>Explore All Industries</strong><small>View complete industry directory</small></span><Icon name="arrow" /></Link>
+        <Link href="/insights" onClick={onNavigate} className={isRouteActive(pathname, "/insights") ? "active-submenu-item" : undefined}><Icon name="file" /><span><strong>Industry Insights</strong><small>Articles, guides and publications</small></span><Icon name="arrow" /></Link>
+        <Link href="/insights/legal-updates" onClick={onNavigate} className={isRouteActive(pathname, "/insights/legal-updates") ? "active-submenu-item" : undefined}><Icon name="document" /><span><strong>Regulatory Updates</strong><small>Latest developments by sector</small></span><Icon name="arrow" /></Link>
+        <Link href="/professionals" onClick={onNavigate} className={isRouteActive(pathname, "/professionals") ? "active-submenu-item" : undefined}><Icon name="search" /><span><strong>Find a Professional</strong><small>Connect with our experts</small></span><Icon name="arrow" /></Link>
       </div>
       <Link className={styles.contact} href="/contact" onClick={onNavigate}><Icon name="mail" /><span><strong>Discuss Your Industry Requirement</strong><small>Get tailored advisory support</small></span><Icon name="arrow" /></Link>
       <div className={styles.sidebarBottom}><span>GLOBAL PERSPECTIVE.<br />INDUSTRY FOCUS.</span></div>

@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Icon from "./icon";
 import styles from "./about-menu.module.css";
+import { isRouteActive } from "./navigation-state";
 
 const columns = [
   [
@@ -32,15 +34,17 @@ const quickLinks = [
 ] as const;
 
 export default function AboutMenu({ id, onNavigate }: { id: string; onNavigate: () => void }) {
+  const pathname = usePathname();
+
   return <div className={`mega-menu ${styles.menu}`} id={id}>
     
     <div className={styles.body}>
-      <div className={styles.columns}>{columns.map((column, index) => <div className={styles.column} key={index}>{column.map(([icon, title, description, href]) => <Link href={href} onClick={onNavigate} key={title} className={styles.item}><Icon name={icon} /><span><strong>{title}</strong><small>{description}</small></span><span className={styles.chevron} aria-hidden="true">›</span></Link>)}</div>)}</div>
+      <div className={styles.columns}>{columns.map((column, index) => <div className={styles.column} key={index}>{column.map(([icon, title, description, href]) => <Link href={href} onClick={onNavigate} key={title} className={`${styles.item} ${isRouteActive(pathname, href) ? "active-submenu-item" : ""}`.trim()}><Icon name={icon} /><span><strong>{title}</strong><small>{description}</small></span><span className={styles.chevron} aria-hidden="true">›</span></Link>)}</div>)}</div>
       <aside className={styles.feature}>
         <div className={styles.featureVisual}><span className={styles.eyebrow}>A global mindset.<br />Local insight.</span><span className={styles.rule} /><h3>Building<br />Trusted<br />Partnerships<br />Worldwide.</h3><Link href="/global-presence" onClick={onNavigate}>Our Global Presence <Icon name="arrow" /></Link></div>
         <div className={styles.stats}><div><strong>11+</strong><span>Years<br />of Experience</span></div><div><strong>1000+</strong><span>Advisory<br />Assignments</span></div><div><strong>30+</strong><span>Countries<br />in Network</span></div></div>
       </aside>
     </div>
-    <div className={styles.footer}>{quickLinks.map(([icon, title, description, href]) => <Link href={href} onClick={onNavigate} key={title}><Icon name={icon} /><span><strong>{title}</strong><small>{description}</small></span></Link>)}</div>
+    <div className={styles.footer}>{quickLinks.map(([icon, title, description, href]) => <Link href={href} onClick={onNavigate} key={title} className={isRouteActive(pathname, href) ? "active-submenu-item" : undefined}><Icon name={icon} /><span><strong>{title}</strong><small>{description}</small></span></Link>)}</div>
   </div>;
 }

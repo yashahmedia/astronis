@@ -356,11 +356,37 @@ textarea:focus {
   white-space: nowrap;
 }
 .navigation > a:not(.button),
-.nav-label > a {
+.nav-label > a,
+.nav-link {
   padding: 17px 0;
 }
-.navigation .active {
-  color: var(--blue);
+.nav-link {
+  position: relative;
+  color: #4b5563;
+  transition: color 0.2s ease;
+}
+.nav-link:hover {
+  color: #1f2937;
+}
+.nav-link.active {
+  color: #0f172a;
+  font-weight: 600;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  width: 0;
+  height: 2px;
+  background: var(--navy);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transition: width 0.25s ease;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
 }
 .nav-label {
   display: flex;
@@ -413,12 +439,10 @@ textarea:focus {
   pointer-events: none;
   transform: translateY(6px);
   transition:
-    opacity 0.2s,
-    transform 0.2s,
-    visibility 0.2s;
+    opacity 180ms ease,
+    transform 180ms ease,
+    visibility 180ms ease;
 }
-.nav-item:hover .mega-menu,
-.nav-item:focus-within .mega-menu,
 .nav-item.is-open .mega-menu {
   visibility: visible;
   opacity: 1;
@@ -461,6 +485,17 @@ textarea:focus {
 }
 .mega-links a:hover {
   color: var(--blue);
+}
+.mega-menu a.active-submenu-item {
+  color: #0f172a;
+  background: rgba(15, 23, 42, 0.05);
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--blue);
+}
+.mega-menu a.active-submenu-item small,
+.mega-menu a.active-submenu-item > svg,
+.mega-menu a.active-submenu-item .chevron {
+  color: #0f172a;
 }
 .hero {
   position: relative;

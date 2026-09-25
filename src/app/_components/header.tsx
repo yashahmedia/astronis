@@ -18,6 +18,8 @@ import AboutMenu from "./about-menu";
 import GlobalPresenceMenu from "./global-presence-menu";
 import InsightsMenu from "./insights-menu";
 import TechnologyMenu from "./technology-menu";
+import { isRouteActive } from "./navigation-state";
+
 const navigation = [
   {
     label: "About Us",
@@ -98,38 +100,86 @@ const navigation = [
     })),
   },
 ];
+
 export default function Header() {
-  const [mobile, setMobile] = useState(false),
-    [open, setOpen] = useState<string | null>(null);
+  const [mobile, setMobile] = useState(false);
+  const [open, setOpen] = useState<string | null>(null);
   const path = usePathname();
   const ref = useRef<HTMLElement>(null);
+  const hoverTimer = useRef<number | null>(null);
+
+  const closeMenus = () => {
+    if (hoverTimer.current) {
+      window.clearTimeout(hoverTimer.current);
+      hoverTimer.current = null;
+    }
+    setOpen(null);
+    setMobile(false);
+  };
+
+  const toggleMenu = (label: string) => {
+    setOpen((current) => (current === label ? null : label));
+  };
+
+  const scheduleOpen = (label: string) => {
+    if (window.innerWidth <= 1050) return;
+    if (hoverTimer.current) window.clearTimeout(hoverTimer.current);
+    hoverTimer.current = window.setTimeout(() => setOpen(label), 120);
+  };
+
+  const scheduleClose = () => {
+    if (window.innerWidth <= 1050) return;
+    if (hoverTimer.current) window.clearTimeout(hoverTimer.current);
+    hoverTimer.current = window.setTimeout(() => setOpen(null), 180);
+  };
+
   useEffect(() => {
-    function outside(e: PointerEvent) {
-      if (!ref.current?.contains(e.target as Node)) {
-        setOpen(null);
-        setMobile(false);
+    closeMenus();
+  }, [path]);
+
+  useEffect(() => {
+    if (mobile) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobile]);
+
+  useEffect(() => {
+    function outside(event: PointerEvent) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        closeMenus();
       }
     }
-    function escape(e: KeyboardEvent) {
-      if (e.key === "Escape") {
-        setOpen(null);
-        setMobile(false);
+
+    function escape(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        closeMenus();
       }
     }
+
     document.addEventListener("pointerdown", outside);
     document.addEventListener("keydown", escape);
+
     return () => {
       document.removeEventListener("pointerdown", outside);
       document.removeEventListener("keydown", escape);
     };
   }, []);
+
   useEffect(() => {
-    close();
-  }, [path]);
-  function close() {
-    setMobile(false);
-    setOpen(null);
-  }
+    return () => {
+      if (hoverTimer.current) {
+        window.clearTimeout(hoverTimer.current);
+      }
+      document.body.style.overflow = "";
+    };
+  }, []);
+
   return (
     <header ref={ref} className="site-header">
       <div className="utility-bar">
@@ -155,7 +205,7 @@ export default function Header() {
           href="/"
           className="brand"
           aria-label="Astronis Global home"
-          onClick={close}
+          onClick={closeMenus}
         >
           <Image
             src="/astronis_logo.jpeg"
@@ -167,7 +217,7 @@ export default function Header() {
         </Link>
         <button
           className="menu-toggle"
-          onClick={() => setMobile(!mobile)}
+          onClick={() => setMobile((value) => !value)}
           aria-expanded={mobile}
           aria-controls="main-navigation"
           aria-label={mobile ? "Close menu" : "Open menu"}
@@ -183,49 +233,70 @@ export default function Header() {
             <Fragment key={n.href}>
               <div
                 className={open === n.label ? "nav-item is-open" : "nav-item"}
+                onMouseEnter={() => scheduleOpen(n.label)}
+                onMouseLeave={scheduleClose}
               >
-              <div className="nav-label">
-                <Link
-                  className={path.startsWith(n.href) ? "active" : ""}
-                  href={n.href}
-                  onClick={close}
-                >
-                  {n.label}
-                </Link>
-                <button
-                  aria-label={`Toggle ${n.label} menu`}
-                  aria-expanded={open === n.label}
-                  aria-controls={"menu-" + slugify(n.label)}
-                  onClick={() => setOpen(open === n.label ? null : n.label)}
-                >
-                  <Icon name="chevron" className="nav-chevron" />
-                </button>
-              </div>
-              {n.label === "Technology & Digital" ? <TechnologyMenu id={"menu-" + slugify(n.label)} onNavigate={close} /> : n.label === "About Us" ? <AboutMenu id={"menu-" + slugify(n.label)} onNavigate={close} /> : n.label === "Professionals" ? <ProfessionalsMenu id={"menu-" + slugify(n.label)} onNavigate={close} /> : n.label === "Industries" ? <IndustriesMenu id={"menu-" + slugify(n.label)} onNavigate={close} /> : n.label === "Services" ? <ServicesMenu id={"menu-" + slugify(n.label)} onNavigate={close} /> : n.label === "Global Presence" ? <GlobalPresenceMenu id={"menu-" + slugify(n.label)} onNavigate={close} /> : n.label === "Insights" ? <InsightsMenu id={"menu-" + slugify(n.label)} onNavigate={close} /> : <div className="mega-menu" id={"menu-" + slugify(n.label)}>
-                  <div className="mega-intro">
-                    <span className="eyebrow">ASTRONIS GLOBAL</span>
-                    <h2>{n.label}</h2>
-                    <Link href={n.href} onClick={close}>
-                      Explore all <Icon name="arrow" />
-                    </Link>
-                  </div>
-                  <div className="mega-links">
-                    {n.items.map((item) => (
-                      <Link
-                        key={item.href + item.title}
-                        href={item.href}
-                        onClick={close}
-                      >
-                        <span aria-hidden="true">→</span>
-                        {item.title}
+                <div className="nav-label">
+                  <Link
+                    className={isRouteActive(path, n.href) ? "nav-link active" : "nav-link"}
+                    href={n.href}
+                    onClick={closeMenus}
+                  >
+                    {n.label}
+                  </Link>
+                  <button
+                    type="button"
+                    aria-label={`Toggle ${n.label} menu`}
+                    aria-expanded={open === n.label}
+                    aria-haspopup="true"
+                    aria-controls={"menu-" + slugify(n.label)}
+                    onClick={() => toggleMenu(n.label)}
+                  >
+                    <Icon name="chevron" className="nav-chevron" />
+                  </button>
+                </div>
+                {n.label === "Technology & Digital" ? (
+                  <TechnologyMenu id={"menu-" + slugify(n.label)} onNavigate={closeMenus} />
+                ) : n.label === "About Us" ? (
+                  <AboutMenu id={"menu-" + slugify(n.label)} onNavigate={closeMenus} />
+                ) : n.label === "Professionals" ? (
+                  <ProfessionalsMenu id={"menu-" + slugify(n.label)} onNavigate={closeMenus} />
+                ) : n.label === "Industries" ? (
+                  <IndustriesMenu id={"menu-" + slugify(n.label)} onNavigate={closeMenus} />
+                ) : n.label === "Services" ? (
+                  <ServicesMenu id={"menu-" + slugify(n.label)} onNavigate={closeMenus} />
+                ) : n.label === "Global Presence" ? (
+                  <GlobalPresenceMenu id={"menu-" + slugify(n.label)} onNavigate={closeMenus} />
+                ) : n.label === "Insights" ? (
+                  <InsightsMenu id={"menu-" + slugify(n.label)} onNavigate={closeMenus} />
+                ) : (
+                  <div className="mega-menu" id={"menu-" + slugify(n.label)}>
+                    <div className="mega-intro">
+                      <span className="eyebrow">ASTRONIS GLOBAL</span>
+                      <h2>{n.label}</h2>
+                      <Link href={n.href} onClick={closeMenus}>
+                        Explore all <Icon name="arrow" />
                       </Link>
-                    ))}
+                    </div>
+                    <div className="mega-links">
+                      {n.items.map((item) => (
+                        <Link
+                          key={item.href + item.title}
+                          href={item.href}
+                          onClick={closeMenus}
+                          className={isRouteActive(path, item.href) ? "active-submenu-item" : undefined}
+                        >
+                          <span aria-hidden="true">→</span>
+                          {item.title}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-              </div>}
+                )}
               </div>
             </Fragment>
           ))}
-          <Link className="button nav-cta" href="/contact" onClick={close}>
+          <Link className="button nav-cta" href="/contact" onClick={closeMenus}>
             Schedule Meeting <Icon name="arrow" />
           </Link>
         </nav>

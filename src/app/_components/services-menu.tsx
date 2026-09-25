@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { practices } from "@/content/site";
 import Icon from "./icon";
 import styles from "./services-menu.module.css";
+import { isRouteActive } from "./navigation-state";
 
 const groups = [
   { title: "Corporate & Business", caption: "Build · Grow · Transform", icon: "building", slugs: ["corporate-and-commercial-advisory", "business-advisory-and-consulting", "banking-nbfc-and-financial-services-advisory", "startup-and-investment-advisory", "intellectual-property-rights", "rera-and-real-estate-advisory"] },
@@ -17,6 +19,7 @@ const bySlug = new Map(practices.map((practice) => [practice.slug, practice]));
 
 export default function ServicesMenu({ id, onNavigate }: { id: string; onNavigate: () => void }) {
   const [query, setQuery] = useState("");
+  const pathname = usePathname();
   const term = query.trim().toLowerCase();
   const matches = (practice: (typeof practices)[number]) => `${practice.title} ${practice.description}`.toLowerCase().includes(term);
   const count = practices.filter(matches).length;
@@ -30,7 +33,8 @@ export default function ServicesMenu({ id, onNavigate }: { id: string; onNavigat
           <div className={styles.links}>{group.slugs.map((slug) => {
             const practice = bySlug.get(slug);
             if (!practice || !matches(practice)) return null;
-            return <Link href={`/services/${practice.slug}`} key={slug} onClick={onNavigate}><span><strong>{practice.title}</strong><small>{practice.description}</small></span><Icon name="arrow" /></Link>;
+            const href = `/services/${practice.slug}`;
+            return <Link href={href} key={slug} onClick={onNavigate} className={isRouteActive(pathname, href) ? "active-submenu-item" : undefined}><span><strong>{practice.title}</strong><small>{practice.description}</small></span><Icon name="arrow" /></Link>;
           })}</div>
           {group.title === "People, Risk & Sustainability" && !term && <Link className={styles.model} href="/services" onClick={onNavigate}><span>Our integrated model</span><strong>Corporate × Regulatory<br />Legal × Business Advisory</strong><small>Connected advice for complex business decisions.</small><em>Discover our approach <Icon name="arrow" /></em></Link>}
         </section>)}
@@ -41,22 +45,22 @@ export default function ServicesMenu({ id, onNavigate }: { id: string; onNavigat
         <label htmlFor="service-menu-search">Find the right service</label><p>Search by service, issue, regulator or business need.</p>
         <div className={styles.search}><Icon name="search" /><input id="service-menu-search" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search services..." /></div>
         <div className={styles.quickLinks}>
-          <Link href="/services" onClick={onNavigate}><Icon name="file" />Explore All Services<Icon name="arrow" /></Link>
-          <Link href="/insights" onClick={onNavigate}><Icon name="bulb" />Service Insights<Icon name="arrow" /></Link>
-          <Link href="/insights/legal-updates" onClick={onNavigate}><Icon name="document" />Regulatory Updates<Icon name="arrow" /></Link>
-          <Link href="/professionals" onClick={onNavigate}><Icon name="people" />Find a Professional<Icon name="arrow" /></Link>
-          <Link href="/contact" onClick={onNavigate}><Icon name="mail" />Discuss Your Requirement<Icon name="arrow" /></Link>
+          <Link href="/services" onClick={onNavigate} className={isRouteActive(pathname, "/services") ? "active-submenu-item" : undefined}><Icon name="file" />Explore All Services<Icon name="arrow" /></Link>
+          <Link href="/insights" onClick={onNavigate} className={isRouteActive(pathname, "/insights") ? "active-submenu-item" : undefined}><Icon name="bulb" />Service Insights<Icon name="arrow" /></Link>
+          <Link href="/insights/legal-updates" onClick={onNavigate} className={isRouteActive(pathname, "/insights/legal-updates") ? "active-submenu-item" : undefined}><Icon name="document" />Regulatory Updates<Icon name="arrow" /></Link>
+          <Link href="/professionals" onClick={onNavigate} className={isRouteActive(pathname, "/professionals") ? "active-submenu-item" : undefined}><Icon name="people" />Find a Professional<Icon name="arrow" /></Link>
+          <Link href="/contact" onClick={onNavigate} className={isRouteActive(pathname, "/contact") ? "active-submenu-item" : undefined}><Icon name="mail" />Discuss Your Requirement<Icon name="arrow" /></Link>
         </div>
         <div className={styles.insight}><span>Featured perspective</span><strong>Practical advice for a changing regulatory landscape.</strong><Link href="/insights" onClick={onNavigate}>Explore insights <Icon name="arrow" /></Link></div>
       </aside>
     </div>
 
     <div className={styles.footer}>
-      <Link href="/services" onClick={onNavigate}><Icon name="file" /><span><strong>Explore All Services</strong><small>Complete service portfolio</small></span></Link>
-      <Link href="/services" onClick={onNavigate}><Icon name="search" /><span><strong>Browse by Business Need</strong><small>Find the right support</small></span></Link>
-      <Link href="/industries" onClick={onNavigate}><Icon name="building" /><span><strong>Browse Industries</strong><small>Sector-specific advice</small></span></Link>
-      <Link href="/global-presence" onClick={onNavigate}><Icon name="globe" /><span><strong>Global Capabilities</strong><small>Cross-border expertise</small></span></Link>
-      <Link href="/insights" onClick={onNavigate}><Icon name="bulb" /><span><strong>Service Insights</strong><small>Articles and updates</small></span></Link>
+      <Link href="/services" onClick={onNavigate} className={isRouteActive(pathname, "/services") ? "active-submenu-item" : undefined}><Icon name="file" /><span><strong>Explore All Services</strong><small>Complete service portfolio</small></span></Link>
+      <Link href="/services" onClick={onNavigate} className={isRouteActive(pathname, "/services") ? "active-submenu-item" : undefined}><Icon name="search" /><span><strong>Browse by Business Need</strong><small>Find the right support</small></span></Link>
+      <Link href="/industries" onClick={onNavigate} className={isRouteActive(pathname, "/industries") ? "active-submenu-item" : undefined}><Icon name="building" /><span><strong>Browse Industries</strong><small>Sector-specific advice</small></span></Link>
+      <Link href="/global-presence" onClick={onNavigate} className={isRouteActive(pathname, "/global-presence") ? "active-submenu-item" : undefined}><Icon name="globe" /><span><strong>Global Capabilities</strong><small>Cross-border expertise</small></span></Link>
+      <Link href="/insights" onClick={onNavigate} className={isRouteActive(pathname, "/insights") ? "active-submenu-item" : undefined}><Icon name="bulb" /><span><strong>Service Insights</strong><small>Articles and updates</small></span></Link>
       <Link className={styles.cta} href="/contact" onClick={onNavigate}>Discuss Your Requirement <Icon name="arrow" /></Link>
     </div>
   </div>;
