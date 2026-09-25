@@ -125,6 +125,11 @@
   transform: scale(1.018);
 }
 
+.item:hover strong,
+.item:focus-visible strong {
+  text-decoration-color: #dceeff;
+}
+
 .item > svg {
   width: 28px;
   height: 28px;
@@ -140,7 +145,9 @@
 
 .item strong {
   color: inherit;
-  font: 500 13px/1.18 "Segoe UI", Arial, sans-serif;
+  font: 700 13px/1.18 "Segoe UI", Arial, sans-serif;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
 }
 
 .item small {
