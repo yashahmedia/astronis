@@ -44,10 +44,7 @@ export default function GlobalPresenceMenu({ id, onNavigate }: { id: string; onN
   const pathname = usePathname();
 
   return <div className={`mega-menu ${styles.menu}`} id={id}>
-    <div className={styles.intro}>
-      <div><span className={styles.eyebrow}>Global Presence</span><h2>A Global Mindset. Local Insight.</h2><p>Connecting businesses across borders with trusted legal, regulatory and business advisory support.</p></div>
-      <Link href="/global-presence#countries" onClick={onNavigate} className={styles.mapCta}><span>View Interactive Global Map <Icon name="arrow" /></span><small>Explore our presence, offices and partner network worldwide.</small></Link>
-    </div>
+    
     <div className={styles.main}>
       <section className={styles.regions} aria-label="Our regions">
         {regions.map(([name, description, image]) => {

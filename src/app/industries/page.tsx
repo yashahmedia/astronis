@@ -5,6 +5,7 @@ import Insights from "../home/insights";
 import FAQ from "../home/faq";
 import Professionals from "../home/professionals";
 import Consultation from "../home/consultation";
+import IndustryEnquiryForm from "@/components/forms/IndustryEnquiryForm";
 export const metadata = {
   title: "Industries",
   description:
@@ -19,6 +20,9 @@ export default function IndustriesPage() {
       <Insights />
       <FAQ />
       <Professionals />
+      <div style={{ padding: "0 1rem 2rem" }}>
+        <IndustryEnquiryForm />
+      </div>
       <Consultation />
     </>
   );

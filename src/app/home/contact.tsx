@@ -1,5 +1,5 @@
 import { Heading } from "../_components/ui";
-import EnquiryForm from "../contact/enquiry-form";
+import HomeEnquiryForm from "@/components/forms/HomeEnquiryForm";
 import ContactDetails from "../contact/contact-details";
 export default function Contact() {
   return (
@@ -21,7 +21,7 @@ export default function Contact() {
               />
             </div>
           </div>
-          <EnquiryForm />
+          <HomeEnquiryForm />
         </div>
       </div>
     </section>

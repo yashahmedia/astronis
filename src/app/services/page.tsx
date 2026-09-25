@@ -5,7 +5,7 @@ import { industries, practices, serviceBanners } from "@/content/site";
 import FAQ from "../home/faq";
 import Insights from "../home/insights";
 import SuccessStories from "../home/success-stories";
-import EnquiryForm from "../contact/enquiry-form";
+import ServiceEnquiryForm from "@/components/forms/ServiceEnquiryForm";
 import ServiceDirectory from "./service-directory";
 import styles from "./services.module.css";
 
@@ -56,7 +56,7 @@ export default function ServicesPage() {
             </a>
           </aside>
           <div className="service-consultation-form-wrap">
-            <EnquiryForm />
+            <ServiceEnquiryForm />
           </div>
         </div>
       </div>

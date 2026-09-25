@@ -10,6 +10,7 @@ export async function POST(request: Request) {
       { message: "Your enquiry is too long." },
       { status: 413 },
     );
+
   let data: FormData;
   try {
     data = await request.formData();
@@ -19,37 +20,82 @@ export async function POST(request: Request) {
       { status: 400 },
     );
   }
+
+  const getField = (key: string) => String(data.get(key) || "").trim();
+
   const fields = Object.fromEntries(
     [
       "name",
       "email",
       "company",
       "phone",
+      "designation",
       "service",
+      "industry",
+      "technology",
+      "solution",
+      "category",
+      "requirement",
+      "country",
+      "state",
+      "city",
+      "companyType",
+      "companySize",
+      "timeline",
+      "preferredContact",
+      "agreementType",
+      "matterStage",
+      "licenceNeed",
+      "regulator",
+      "currentStatus",
+      "transactionType",
+      "countriesInvolved",
+      "transactionStage",
+      "ipRequirement",
       "location",
       "message",
       "consent",
       "website",
-    ].map((k) => [k, String(data.get(k) || "").trim()]),
+      "pageUrl",
+      "pageTitle",
+      "pathname",
+      "referrer",
+      "utmSource",
+      "utmMedium",
+      "utmCampaign",
+      "formType",
+      "source",
+    ].map((key) => [key, getField(key)]),
   );
+
   if (fields.website)
     return Response.json(
       { message: "Unable to submit this enquiry." },
       { status: 400 },
     );
+
+  const hasPrimarySelection = Boolean(
+    fields.service || fields.industry || fields.technology || fields.requirement || fields.category || fields.formType === "home",
+  );
+
+  const companyRequired = fields.formType !== "home";
+  const messageRequired = fields.message.length >= 10 || fields.formType === "home";
+
   if (
     fields.name.length < 2 ||
     !/^\S+@\S+\.\S+$/.test(fields.email) ||
-    !fields.company ||
-    !fields.service ||
-    fields.message.length < 10 ||
+    (companyRequired && !fields.company) ||
+    !hasPrimarySelection ||
+    !fields.country ||
+    !messageRequired ||
     fields.consent !== "yes" ||
-    Object.values(fields).some((v) => v.length > 5000)
+    Object.values(fields).some((value) => typeof value === "string" && value.length > 5000)
   )
     return Response.json(
       { message: "Please check all required fields and provide your consent." },
       { status: 400 },
     );
+
   const webhook = process.env.ENQUIRY_WEBHOOK_URL;
   if (!webhook)
     return Response.json(
@@ -59,9 +105,11 @@ export async function POST(request: Request) {
       },
       { status: 503 },
     );
+
   try {
     const url = new URL(webhook);
     if (url.protocol !== "https:") throw new Error("HTTPS required");
+
     const result = await fetch(url, {
       method: "POST",
       headers: {
@@ -73,9 +121,11 @@ export async function POST(request: Request) {
       body: JSON.stringify({
         ...fields,
         submittedAt: new Date().toISOString(),
+        type: fields.formType || fields.category || "enquiry",
       }),
       signal: AbortSignal.timeout(12000),
     });
+
     if (!result.ok) throw new Error("Delivery failed");
     return Response.json({
       message:
