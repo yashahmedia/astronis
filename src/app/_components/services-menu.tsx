@@ -22,11 +22,7 @@ export default function ServicesMenu({ id, onNavigate }: { id: string; onNavigat
   const count = practices.filter(matches).length;
 
   return <div className={`mega-menu ${styles.menu}`} id={id}>
-    <div className={styles.intro}>
-      <div><span className={styles.eyebrow}>Our Services</span><h2>Integrated Corporate <span>·</span> Regulatory <span>·</span> Legal <span>·</span> Business Advisory</h2><p>Strategic guidance from establishment and compliance to growth, disputes and global expansion.</p></div>
-      <Link href="/services" onClick={onNavigate}><strong>Explore All Services <Icon name="arrow" /></strong><small>{practices.length} services. One integrated platform.</small></Link>
-    </div>
-
+    
     <div className={styles.body}>
       <div className={styles.columns}>
         {groups.map((group) => <section className={styles.column} key={group.title} aria-label={group.title}>
