@@ -4,7 +4,7 @@ export const professionals = [
   {
     name: "Krishna Kumar Mishra",
     slug: "krishna-kumar-mishra",
-    image: "/krishna_kumar_mishra.jpeg",
+    image: "/Professionals/krishna_kumar_mishra.jpeg",
     role: "Founder Partner",
     expertise: "Corporate, commercial & regulatory advisory",
     description:
@@ -15,7 +15,7 @@ export const professionals = [
   {
     name: "Priti Mishra",
     slug: "priti-mishra",
-    image: "/pritimishra.jpeg",
+    image: "/Professionals/pritimishra.jpeg",
     role: "Founder Partner",
     expertise: "Litigation, matrimonial matters & compliance",
     description:
@@ -26,7 +26,7 @@ export const professionals = [
   {
     name: "Krishna Nand Mishra",
     slug: "krishna-nand-mishra",
-    image: "/Krishna_nand.jpeg",
+    image: "/Professionals/Krishna_nand.jpeg",
     role: "Professional Team",
     expertise: "Legal, regulatory & business advisory",
     description:
@@ -37,7 +37,7 @@ export const professionals = [
   {
     name: "Puneet Kumar Verma",
     slug: "puneet-kumar-verma",
-    image: "/Puneet_kumar.jpeg",
+    image: "/Professionals/Puneet_kumar.jpeg",
     role: "Professional Team",
     expertise: "Legal, regulatory & business advisory",
     description:
