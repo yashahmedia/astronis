@@ -25,7 +25,7 @@
 .column:last-child { border-right: 0; }
 .heading { display: flex; align-items: center; gap: 12px; min-height: 67px; padding-bottom: 15px; border-bottom: 1px solid #dbe7f6; }
 .heading h3 { flex: 1; font: 400 clamp(15px, 1.17vw, 19px)/1.25 Georgia, serif; }
-.heading > svg { flex: none; width: 39px; height: 39px; color: #0759ff; stroke-width: 1.5; }
+.heading > svg { flex: none; width: 39px; height: 39px; color: #0d2c5d; stroke-width: 1.5; }
 .heading > svg:last-child { width: 16px; height: 16px; }
 .links { display: grid; padding-top: 4px; }
 .links a { display: grid; grid-template-columns: minmax(0, 1fr) 14px; align-items: center; gap: 8px; min-height: 70px; padding: 10px 9px; border-bottom: 1px solid #dbe7f6; border-radius: 4px; color: #15366f; transform: translateZ(0); transition: background-color 180ms ease, box-shadow 180ms ease, color 180ms ease, transform 180ms ease; }
@@ -33,35 +33,27 @@
 .links a > span { display: grid; gap: 5px; min-width: 0; }
 .links strong { font: 700 14px/1.25 "Segoe UI", Arial, sans-serif; }
 .links small { color: #536789; font: 400 12px/1.35 "Segoe UI", Arial, sans-serif; }
-.links a > svg { width: 14px; height: 14px; color: #0759ff; transition: color 180ms ease, transform 180ms ease; }
+.links a > svg { width: 14px; height: 14px; color: #0d2c5d; transition: color 180ms ease, transform 180ms ease; }
 .links a:hover, .links a:focus-visible { color: #fff; background: #0d4c9e; box-shadow: 0 8px 18px #0d4c9e2e; transform: scale(1.018); }
 .links a:hover small, .links a:focus-visible small, .links a:hover > svg, .links a:focus-visible > svg { color: #dceeff; }
 .links a:hover > svg, .links a:focus-visible > svg { transform: translateX(2px); }
 .heading:hover { color: #0759ff; }
-.menu a:focus-visible, .searchField:focus-within { outline: 2px solid #0759ff; outline-offset: 3px; border-radius: 2px; }
+.menu a:focus-visible,
+.searchField:focus-within {
+  outline: none;
+  box-shadow: none;
+  border-radius: 2px;
+}
 .feature { display: flex; flex-direction: column; justify-content: space-between; min-height: 326px; padding: 34px 28px 14px; background: linear-gradient(125deg, #d8effff5, #cbe9ff91 50%, #3c88c324), url('/images/india-presence/mumbai.jpg') center/cover; }
+.featureCopy { display: flex; flex-direction: column; gap: 12px; }
 .feature p { font-size: 14px; line-height: 1.5; letter-spacing: 1.7px; text-transform: uppercase; }
 .feature p::after { content: ""; display: block; width: 39px; height: 1px; background: #2852af; margin-top: 16px; }
 .feature > span { font-size: 12px; letter-spacing: 1.8px; text-transform: uppercase; }
-.footer { display: grid; grid-template-columns: 42% 16% 42%; padding: 27px 22px 25px; background: linear-gradient(115deg, #eef8ff, #e8f3ff); }
-.search { padding: 0 42px 0 20px; }
-.search label { display: block; margin-bottom: 13px; font: 27px/1.15 "Segoe UI", Arial, sans-serif; }
-.searchField { display: flex; align-items: center; gap: 15px; padding: 11px 17px; border: 1px solid #b6cdeb; border-radius: 3px; background: #fff; }
-.searchField svg { flex: none; width: 25px; height: 25px; }
-.searchField svg:last-child { width: 17px; height: 17px; }
-.searchField input { min-width: 0; width: 100%; border: 0; outline: 0; background: transparent; color: #082675; font: 16px/1.4 "Segoe UI", Arial, sans-serif; }
-.searchField input::placeholder { color: #68769c; }
-.searchStatus { font-size: 12px; line-height: 1.4; margin-top: 7px; }
-.signature { padding: 0 28px 0 36px; border-left: 1px solid #a9c9ed; text-transform: uppercase; letter-spacing: 1.5px; font-size: 12px; line-height: 1.5; }
-.signature small { display: block; margin-top: 13px; font-size: 10px; letter-spacing: .6px; }
-.signature small::before { content: ""; display: block; width: 40px; height: 1px; background: #2852af; margin-bottom: 12px; }
-.shortcuts { display: grid; grid-template-columns: repeat(4, 1fr); }
-.shortcuts a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px; padding: 8px 15px; border-left: 1px solid #a9c9ed; text-align: center; font-size: 17px; line-height: 1.3; }
-.shortcuts svg { color: #0759ff; width: 38px; height: 38px; stroke-width: 1.4; }
-.shortcuts strong { font-weight: 400; }
-.shortcuts small { display: block; margin-top: 5px; color: #536789; font: 400 12px/1.35 "Segoe UI", Arial, sans-serif; }
-.shortcuts .shortcutArrow { width: 15px; height: 15px; }
-.shortcuts a:hover { color: #0759ff; background: #ffffff75; }
+.footer { display: none; }
+.search { display: none; }
+.searchField { display: none; }
+.searchStatus { display: none; }
+.shortcuts { display: none; }
 @media (max-width: 1320px) {
   .menu { width: calc(100vw - 32px); }
   .column { padding-inline: 10px; }
