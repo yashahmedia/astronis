@@ -133,8 +133,10 @@
 .item > svg {
   width: 28px;
   height: 28px;
-  color: #103d82;
-  stroke-width: 1.35;
+  color: #0a3977;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   transition: color 180ms ease;
 }
 
