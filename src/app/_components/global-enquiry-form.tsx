@@ -245,92 +245,102 @@ export default function GlobalEnquiryForm({
     event.preventDefault();
     if (!validate()) return;
 
-    const formData = new FormData(event.currentTarget);
     const message = detail.message.trim();
     const selectedService = category === "service" ? primarySelection : "";
     const selectedIndustry = category === "industry" ? primarySelection : "";
     const selectedTechnology = category === "technology" ? primarySelection : "";
     const requirement = secondarySelection || detail.interest || primarySelection;
-
-    formData.set("name", detail.name.trim());
-    formData.set("email", detail.email.trim());
-    formData.set("company", detail.company.trim());
-    formData.set("phone", detail.phone.trim());
-    formData.set("designation", detail.designation.trim());
-    formData.set("category", category);
-    formData.set("requirement", requirement);
-    formData.set("service", selectedService);
-    formData.set("industry", selectedIndustry);
-    formData.set("technology", selectedTechnology);
-    formData.set("country", detail.country.trim());
-    formData.set("state", detail.state.trim());
-    formData.set("city", detail.city.trim());
-    formData.set("companyType", detail.companyType);
-    formData.set("companySize", detail.companySize);
-    formData.set("timeline", detail.timeline);
-    formData.set("preferredContact", detail.preferredContact);
-    formData.set("agreementType", detail.agreementType);
-    formData.set("matterStage", detail.matterStage);
-    formData.set("licenceNeed", detail.licenceNeed);
-    formData.set("regulator", detail.regulator);
-    formData.set("currentStatus", detail.currentStatus);
-    formData.set("transactionType", detail.transactionType);
-    formData.set("countriesInvolved", detail.countriesInvolved);
-    formData.set("transactionStage", detail.transactionStage);
-    formData.set("ipRequirement", detail.ipRequirement);
-    formData.set("pageUrl", window.location.href);
-    formData.set("referrer", document.referrer || "");
-    formData.set("utmSource", new URLSearchParams(window.location.search).get("utm_source") || "");
-    formData.set("utmMedium", new URLSearchParams(window.location.search).get("utm_medium") || "");
-    formData.set("utmCampaign", new URLSearchParams(window.location.search).get("utm_campaign") || "");
-    formData.set("message", message);
-    formData.set("consent", detail.consent ? "yes" : "no");
-    formData.set("website", "");
+    const payload = {
+      formType: category === "service" ? "service" : category === "industry" ? "industry" : category === "technology" ? "technology" : "home",
+      name: detail.name.trim(),
+      email: detail.email.trim(),
+      company: detail.company.trim(),
+      phone: detail.phone.trim(),
+      designation: detail.designation.trim(),
+      category,
+      requirement,
+      service: selectedService,
+      industry: selectedIndustry,
+      technology: selectedTechnology,
+      country: detail.country.trim(),
+      state: detail.state.trim(),
+      city: detail.city.trim(),
+      companyType: detail.companyType,
+      companySize: detail.companySize,
+      timeline: detail.timeline,
+      preferredContact: detail.preferredContact,
+      agreementType: detail.agreementType,
+      matterStage: detail.matterStage,
+      licenceNeed: detail.licenceNeed,
+      regulator: detail.regulator,
+      currentStatus: detail.currentStatus,
+      transactionType: detail.transactionType,
+      countriesInvolved: detail.countriesInvolved,
+      transactionStage: detail.transactionStage,
+      ipRequirement: detail.ipRequirement,
+      pageUrl: window.location.href,
+      pageTitle: document.title || "Astronis Global",
+      pathname: window.location.pathname,
+      referrer: document.referrer || "",
+      utmSource: new URLSearchParams(window.location.search).get("utm_source") || "",
+      utmMedium: new URLSearchParams(window.location.search).get("utm_medium") || "",
+      utmCampaign: new URLSearchParams(window.location.search).get("utm_campaign") || "",
+      message,
+      consent: detail.consent ? "yes" : "",
+      website: "",
+    };
 
     setBusy(true);
     setStatus("");
 
     try {
-      const response = await fetch("/api/enquiry", { method: "POST", body: formData });
-      const result = await response.json();
-      setSuccess(response.ok);
-      setStatus(result.message || "Your enquiry could not be sent.");
-      if (response.ok) {
-        event.currentTarget.reset();
-        setDetail((current) => ({
-          ...current,
-          name: "",
-          email: "",
-          phone: "",
-          company: "",
-          designation: "",
-          country: "India",
-          state: "",
-          city: "",
-          companyType: "",
-          companySize: "",
-          timeline: "",
-          preferredContact: "Email",
-          interest: "",
-          agreementType: "",
-          matterStage: "",
-          licenceNeed: "",
-          regulator: "",
-          currentStatus: "",
-          transactionType: "",
-          countriesInvolved: "",
-          transactionStage: "",
-          ipRequirement: "",
-          message: "",
-          consent: false,
-        }));
-        setCategory(resolvedCategory);
-        setPrimarySelection(startPrimarySelection);
-        setSecondarySelection("");
+      const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok || data?.success !== true) {
+        throw new Error(data?.message || "We couldn't submit your enquiry.");
       }
-    } catch {
+
+      setSuccess(true);
+      setStatus(data.message || "Your enquiry has been submitted successfully.");
+      event.currentTarget.reset();
+      setDetail((current) => ({
+        ...current,
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        designation: "",
+        country: "India",
+        state: "",
+        city: "",
+        companyType: "",
+        companySize: "",
+        timeline: "",
+        preferredContact: "Email",
+        interest: "",
+        agreementType: "",
+        matterStage: "",
+        licenceNeed: "",
+        regulator: "",
+        currentStatus: "",
+        transactionType: "",
+        countriesInvolved: "",
+        transactionStage: "",
+        ipRequirement: "",
+        message: "",
+        consent: false,
+      }));
+      setCategory(resolvedCategory);
+      setPrimarySelection(startPrimarySelection);
+      setSecondarySelection("");
+    } catch (error) {
       setSuccess(false);
-      setStatus("We could not deliver your enquiry right now. Please try again or contact advisory@astronisglobal.com.");
+      setStatus(error instanceof Error ? error.message : "We could not deliver your enquiry right now. Please try again or contact advisory@astronisglobal.com.");
     } finally {
       setBusy(false);
     }

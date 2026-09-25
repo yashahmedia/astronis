@@ -15,16 +15,26 @@ const fieldNames = [
   "utmSource", "utmMedium", "utmCampaign", "formType", "source", "detailAnswer",
 ] as const;
 
-type EnquiryFields = Record<(typeof fieldNames)[number], string>;
+type EnquiryFieldName = (typeof fieldNames)[number];
+type EnquiryFields = Record<EnquiryFieldName, string>;
 
 const emptyFields = (): EnquiryFields =>
   Object.fromEntries(fieldNames.map((field) => [field, ""])) as EnquiryFields;
 
-const sanitize = (value: unknown) =>
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const sanitize = (value: unknown): string =>
   String(value ?? "")
     .replace(/[\u0000-\u001f\u007f]/g, " ")
     .trim()
     .slice(0, 2000);
+
+const normalizeFormType = (value: unknown): string => sanitize(value).toLowerCase();
+
+const normalizeConsent = (value: unknown): string => {
+  const normalized = sanitize(value).toLowerCase();
+  return ["yes", "true", "on"].includes(normalized) ? "yes" : "";
+};
 
 const escapeHtml = (value: string) =>
   value.replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character] || character);
@@ -47,39 +57,106 @@ const subjectFor = (fields: EnquiryFields) => {
   return `New ${type}`;
 };
 
+const rejectWithMessage = (message: string, status = 400) =>
+  Response.json({ success: false, message }, { status });
+
 export async function POST(request: Request) {
   const origin = request.headers.get("origin");
   if (origin && origin !== new URL(request.url).origin)
-    return Response.json({ success: false, message: FAILURE_MESSAGE }, { status: 403 });
+    return rejectWithMessage(FAILURE_MESSAGE, 403);
   if (Number(request.headers.get("content-length") || 0) > 20000)
-    return Response.json({ success: false, message: FAILURE_MESSAGE }, { status: 413 });
+    return rejectWithMessage(FAILURE_MESSAGE, 413);
 
   let raw: Record<string, unknown>;
   try {
     if (!request.headers.get("content-type")?.includes("application/json")) throw new Error("JSON required");
-    raw = await request.json() as Record<string, unknown>;
+    raw = (await request.json()) as Record<string, unknown>;
   } catch {
-    return Response.json({ success: false, message: FAILURE_MESSAGE }, { status: 400 });
+    return rejectWithMessage(FAILURE_MESSAGE, 400);
   }
 
   const fields = emptyFields();
   for (const field of fieldNames) fields[field] = sanitize(raw[field]);
-  if (fields.website || !allowedFormTypes.has(fields.formType))
-    return Response.json({ success: false, message: FAILURE_MESSAGE }, { status: 400 });
+  fields.formType = normalizeFormType(fields.formType);
+  fields.consent = normalizeConsent(raw.consent);
 
-  const primarySelection = fields.requirement || fields.service || fields.industry || fields.technology || fields.category;
-  const companyRequired = fields.formType !== "home";
-  const valid = fields.name.length >= 2 && fields.name.length <= 120 &&
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email) && fields.email.length <= 254 &&
-    (!companyRequired || Boolean(fields.company)) && Boolean(primarySelection) &&
-    Boolean(fields.country) && fields.message.length >= 10 && fields.consent === "yes";
-  if (!valid) return Response.json({ success: false, message: FAILURE_MESSAGE }, { status: 400 });
+  console.log("Enquiry received:", {
+    formType: fields.formType,
+    name: fields.name,
+    email: fields.email,
+    phone: fields.phone,
+    company: fields.company,
+    service: fields.service,
+    industry: fields.industry,
+    technology: fields.technology,
+    solution: fields.solution,
+    country: fields.country,
+    consent: fields.consent,
+    honeypotFilled: Boolean(fields.website),
+    pageUrl: fields.pageUrl,
+  });
+
+  if (fields.website) {
+    console.log("Enquiry rejected: honeypot filled.", { formType: fields.formType, pageUrl: fields.pageUrl });
+    return rejectWithMessage("Your submission could not be processed.", 400);
+  }
+
+  if (!allowedFormTypes.has(fields.formType)) {
+    const message = "Unsupported enquiry type.";
+    console.log("Enquiry rejected:", { reason: message, formType: fields.formType, pageUrl: fields.pageUrl });
+    return rejectWithMessage(message, 400);
+  }
+
+  const validateCommon = () => {
+    if (!fields.name.trim()) return "Please enter your name.";
+    if (fields.name.trim().length < 2 || fields.name.trim().length > 120) return "Please enter your name.";
+    if (!fields.email.trim()) return "Please enter a valid email address.";
+    if (!emailRegex.test(fields.email) || fields.email.length > 254) return "Please enter a valid email address.";
+    if (!fields.phone.trim()) return "Please enter your phone number.";
+    if (!fields.message.trim()) return "Please provide more details about your enquiry.";
+    if (fields.message.trim().length < 10) return "Please provide more details about your enquiry.";
+    if (!fields.consent) return "Please accept the consent checkbox.";
+    return null;
+  };
+
+  const validateForType = () => {
+    switch (fields.formType) {
+      case "home":
+        return null;
+      case "industry":
+        if (!fields.company.trim()) return "Company name is required.";
+        if (!fields.industry.trim()) return "Please select an industry.";
+        return null;
+      case "service":
+        if (!fields.company.trim()) return "Company name is required.";
+        if (!fields.service.trim()) return "Please select a service.";
+        return null;
+      case "technology":
+        if (!fields.company.trim()) return "Company name is required.";
+        if (!fields.technology.trim() && !fields.solution.trim()) return "Please select a technology or solution.";
+        return null;
+      default:
+        return "Unsupported enquiry type.";
+    }
+  };
+
+  const commonError = validateCommon();
+  if (commonError) {
+    console.log("Enquiry rejected:", { reason: commonError, formType: fields.formType, pageUrl: fields.pageUrl });
+    return rejectWithMessage(commonError, 400);
+  }
+
+  const typeError = validateForType();
+  if (typeError) {
+    console.log("Enquiry rejected:", { reason: typeError, formType: fields.formType, pageUrl: fields.pageUrl });
+    return rejectWithMessage(typeError, 400);
+  }
 
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.RESEND_FROM_EMAIL;
   if (!apiKey || !from) {
     console.error("Enquiry submission failed: email provider is not configured");
-    return Response.json({ success: false, message: FAILURE_MESSAGE }, { status: 503 });
+    return rejectWithMessage(FAILURE_MESSAGE, 503);
   }
 
   const entries = Object.entries(fields)
@@ -102,6 +179,7 @@ export async function POST(request: Request) {
     return Response.json({ success: true, message: SUCCESS_MESSAGE });
   } catch (error) {
     console.error("Enquiry submission failed:", error instanceof Error ? error.message : "Unknown email provider error");
-    return Response.json({ success: false, message: FAILURE_MESSAGE }, { status: 502 });
+    return rejectWithMessage(FAILURE_MESSAGE, 502);
   }
 }
+

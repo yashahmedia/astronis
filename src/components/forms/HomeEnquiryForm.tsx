@@ -79,12 +79,10 @@ export default function HomeEnquiryForm() {
       };
 
       const response = await fetch("/api/enquiry", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
-      const result = await response.json();
+      const data = await response.json().catch(() => ({}));
 
-      if (!response.ok || result?.success !== true) {
-        setStatus("We couldn't submit your enquiry right now. Please try again or contact us at advisory@astronisglobal.com.");
-        setSuccess(false);
-        return;
+      if (!response.ok || data?.success !== true) {
+        throw new Error(data?.message || "We couldn't submit your enquiry.");
       }
 
       setSuccess(true);
@@ -98,9 +96,9 @@ export default function HomeEnquiryForm() {
         consent: false,
       });
       setStatus("Thank you for contacting Astronis Global. Your enquiry has been received. Our team will review your requirement and connect you with the appropriate professional.");
-    } catch {
+    } catch (error) {
       setSuccess(false);
-      setStatus("We couldn't submit your enquiry right now. Please try again or contact us at advisory@astronisglobal.com.");
+      setStatus(error instanceof Error ? error.message : "We couldn't submit your enquiry right now. Please try again or contact us at advisory@astronisglobal.com.");
     } finally {
       setBusy(false);
     }

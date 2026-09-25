@@ -15,16 +15,43 @@ export default function PartnershipForm() {
   async function submit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
+    const formData = new FormData(form);
+    const payload = {
+      formType: "service",
+      name: String(formData.get("name") || "").trim(),
+      company: String(formData.get("company") || "").trim(),
+      email: String(formData.get("email") || "").trim(),
+      phone: String(formData.get("phone") || "").trim(),
+      service: String(formData.get("service") || "").trim(),
+      message: String(formData.get("message") || "").trim(),
+      consent: formData.get("consent") ? "yes" : "",
+      website: "",
+      pageUrl: window.location.href,
+      pageTitle: document.title || "Astronis Global",
+      pathname: window.location.pathname,
+      referrer: document.referrer || "",
+      utmSource: new URLSearchParams(window.location.search).get("utm_source") || "",
+      utmMedium: new URLSearchParams(window.location.search).get("utm_medium") || "",
+      utmCampaign: new URLSearchParams(window.location.search).get("utm_campaign") || "",
+    };
+
     setBusy(true);
     setStatus("");
     try {
-      const response = await fetch("/api/enquiry", { method: "POST", body: new FormData(form) });
-      const result = await response.json();
-      setStatus(result.message || "We could not send your enquiry. Please try again.");
-      setSuccess(response.ok);
-      if (response.ok) form.reset();
-    } catch {
-      setStatus("We could not send your enquiry. Please try again or email advisory@astronisglobal.com.");
+      const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || data?.success !== true) {
+        throw new Error(data?.message || "We could not send your enquiry. Please try again.");
+      }
+      setStatus(data.message || "Your enquiry has been submitted successfully.");
+      setSuccess(true);
+      form.reset();
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : "We could not send your enquiry. Please try again or email advisory@astronisglobal.com.");
       setSuccess(false);
     } finally {
       setBusy(false);
