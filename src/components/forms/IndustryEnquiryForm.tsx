@@ -76,6 +76,7 @@ export default function IndustryEnquiryForm({ defaultIndustry = "" }: { defaultI
 
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (busy) return;
 
     const nextErrors: Record<string, string> = {};
     if (!form.fullName.trim()) nextErrors.fullName = "Please enter your full name.";
@@ -95,41 +96,29 @@ export default function IndustryEnquiryForm({ defaultIndustry = "" }: { defaultI
       setBusy(true);
       setStatus("");
 
-      const payload = new FormData();
-      payload.set("formType", "industry");
-      payload.set("name", form.fullName.trim());
-      payload.set("email", form.businessEmail.trim());
-      payload.set("phone", form.phone.trim());
-      payload.set("company", form.company.trim());
-      payload.set("designation", form.designation.trim());
-      payload.set("industry", form.industry);
-      payload.set("country", form.country);
-      payload.set("city", form.city.trim());
-      payload.set("requirement", form.requirement);
-      payload.set("message", form.requirementDetails.trim());
-      payload.set("preferredContact", form.preferredContact);
-      payload.set("pageUrl", window.location.href);
-      payload.set("pathname", window.location.pathname);
-      payload.set("pageTitle", document.title || "Astronis Global");
-      payload.set("referrer", document.referrer || "");
-      payload.set("consent", "yes");
-      payload.set("website", "");
       const params = new URLSearchParams(window.location.search);
-      payload.set("utmSource", params.get("utm_source") || "");
-      payload.set("utmMedium", params.get("utm_medium") || "");
-      payload.set("utmCampaign", params.get("utm_campaign") || "");
+      const payload = {
+        formType: "industry", name: form.fullName.trim(), email: form.businessEmail.trim(),
+        phone: form.phone.trim(), company: form.company.trim(), designation: form.designation.trim(),
+        industry: form.industry, country: form.country, city: form.city.trim(), requirement: form.requirement,
+        message: form.requirementDetails.trim(), preferredContact: form.preferredContact,
+        pageUrl: window.location.href, pathname: window.location.pathname,
+        pageTitle: document.title || "Astronis Global", referrer: document.referrer || "",
+        consent: "yes", website: "", utmSource: params.get("utm_source") || "",
+        utmMedium: params.get("utm_medium") || "", utmCampaign: params.get("utm_campaign") || "",
+      };
 
-      const response = await fetch("/api/enquiry", { method: "POST", body: payload });
+      const response = await fetch("/api/enquiry", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
       const result = await response.json();
 
-      if (!response.ok) {
-        setStatus(result?.message || "Your enquiry could not be submitted.");
+      if (!response.ok || result?.success !== true) {
+        setStatus("We couldn't submit your enquiry right now. Please try again or contact us at advisory@astronisglobal.com.");
         setSuccess(false);
         return;
       }
 
       setSuccess(true);
-      setStatus(result?.message || "Thank you for contacting Astronis Global.");
+      setStatus("Thank you for contacting Astronis Global. Your enquiry has been received. Our team will review your requirement and connect you with the appropriate professional.");
       setForm({
         fullName: "",
         businessEmail: "",
@@ -146,7 +135,7 @@ export default function IndustryEnquiryForm({ defaultIndustry = "" }: { defaultI
       });
     } catch {
       setSuccess(false);
-      setStatus("We could not deliver your enquiry right now. Please try again or email advisory@astronisglobal.com.");
+      setStatus("We couldn't submit your enquiry right now. Please try again or contact us at advisory@astronisglobal.com.");
     } finally {
       setBusy(false);
     }

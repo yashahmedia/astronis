@@ -33,7 +33,7 @@ export async function POST(request: Request) {
   }
 
   const webhook = process.env.ENQUIRY_WEBHOOK_URL;
-  if (!webhook) return Response.json({ message: "Online enquiries are not available yet. Please call +91 9311664455 or email advisory@astronisglobal.com. Your enquiry has not been sent." }, { status: 503 });
+  if (!webhook) return Response.json({ success: false, message: "We couldn't submit your enquiry. Please try again." }, { status: 503 });
   try {
     const url = new URL(webhook);
     if (url.protocol !== "https:") throw new Error("HTTPS required");

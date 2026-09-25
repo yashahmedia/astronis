@@ -40,6 +40,7 @@ export default function HomeEnquiryForm() {
 
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (busy) return;
 
     const nextErrors: Record<string, string> = {};
     if (!form.fullName.trim()) nextErrors.fullName = "Please enter your full name.";
@@ -55,32 +56,33 @@ export default function HomeEnquiryForm() {
       setBusy(true);
       setStatus("");
 
-      const payload = new FormData();
-      payload.set("formType", "home");
-      payload.set("name", form.fullName.trim());
-      payload.set("email", form.email.trim());
-      payload.set("phone", form.phone.trim());
-      payload.set("company", form.company.trim() || "Not provided");
-      payload.set("country", "India");
-      payload.set("requirement", form.interest);
-      payload.set("category", "home");
-      payload.set("message", (form.message || `Home enquiry: ${form.interest}`).trim());
-      payload.set("pageUrl", window.location.href);
-      payload.set("pathname", window.location.pathname);
-      payload.set("pageTitle", document.title || "Astronis Global");
-      payload.set("referrer", document.referrer || "");
-      payload.set("consent", "yes");
-      payload.set("website", "");
       const params = new URLSearchParams(window.location.search);
-      payload.set("utmSource", params.get("utm_source") || "");
-      payload.set("utmMedium", params.get("utm_medium") || "");
-      payload.set("utmCampaign", params.get("utm_campaign") || "");
+      const payload = {
+        formType: "home",
+        name: form.fullName.trim(),
+        email: form.email.trim(),
+        phone: form.phone.trim(),
+        company: form.company.trim(),
+        country: "India",
+        requirement: form.interest,
+        category: "home",
+        message: (form.message || `Home enquiry: ${form.interest}`).trim(),
+        pageUrl: window.location.href,
+        pathname: window.location.pathname,
+        pageTitle: document.title || "Astronis Global",
+        referrer: document.referrer || "",
+        consent: "yes",
+        website: "",
+        utmSource: params.get("utm_source") || "",
+        utmMedium: params.get("utm_medium") || "",
+        utmCampaign: params.get("utm_campaign") || "",
+      };
 
-      const response = await fetch("/api/enquiry", { method: "POST", body: payload });
+      const response = await fetch("/api/enquiry", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
       const result = await response.json();
 
-      if (!response.ok) {
-        setStatus(result?.message || "We could not send your enquiry right now. Please try again.");
+      if (!response.ok || result?.success !== true) {
+        setStatus("We couldn't submit your enquiry right now. Please try again or contact us at advisory@astronisglobal.com.");
         setSuccess(false);
         return;
       }
@@ -95,10 +97,10 @@ export default function HomeEnquiryForm() {
         message: "",
         consent: false,
       });
-      setStatus(result?.message || "Thank you for contacting Astronis Global.");
+      setStatus("Thank you for contacting Astronis Global. Your enquiry has been received. Our team will review your requirement and connect you with the appropriate professional.");
     } catch {
       setSuccess(false);
-      setStatus("We could not deliver your enquiry right now. Please try again or email advisory@astronisglobal.com.");
+      setStatus("We couldn't submit your enquiry right now. Please try again or contact us at advisory@astronisglobal.com.");
     } finally {
       setBusy(false);
     }
