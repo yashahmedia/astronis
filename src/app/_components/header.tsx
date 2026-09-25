@@ -225,11 +225,8 @@ export default function Header() {
               </div>
             </Fragment>
           ))}
-          <Link href="/contact" onClick={close}>
-            Contact Us
-          </Link>
           <Link className="button nav-cta" href="/contact" onClick={close}>
-            Get in Touch <Icon name="arrow" />
+            Schedule Meeting <Icon name="arrow" />
           </Link>
         </nav>
       </div>

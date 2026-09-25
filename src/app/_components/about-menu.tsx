@@ -16,7 +16,7 @@ const columns = [
     ["person", "Leadership & Professionals", "Experienced professionals driving client success.", "/about/leadership-and-professionals"],
   ],
   [
-    ["india", "India Presence", "Across key locations, closer to your business.", "/about/india-presence"],
+    ["pin", "India Presence", "Across key locations, closer to your business.", "/about/india-presence"],
     ["globe", "Global Perspective & International Network", "Cross-border capabilities and global collaboration.", "/about/global-perspective-and-international-network"],
     ["bulb", "Projects, Innovation & Strategic Initiatives", "Building solutions for tomorrow.", "/about/projects-innovation-and-strategic-initiatives"],
     ["award", "Why Choose Astronis Global", "Trusted. Integrated. Result-driven.", "/about/why-choose-astronis-global"],
@@ -33,10 +33,7 @@ const quickLinks = [
 
 export default function AboutMenu({ id, onNavigate }: { id: string; onNavigate: () => void }) {
   return <div className={`mega-menu ${styles.menu}`} id={id}>
-    <div className={styles.intro}>
-      <div><span className={styles.eyebrow}>About Astronis Global</span><h2>Purpose. People. Perspective. Performance.</h2><p>A global mindset with local insight, delivering integrated legal, regulatory and business advisory solutions.</p></div>
-      <Link href="/about" onClick={onNavigate}><strong>Learn More About Us <Icon name="arrow" /></strong><small>Our journey, values and vision for the future.</small></Link>
-    </div>
+    
     <div className={styles.body}>
       <div className={styles.columns}>{columns.map((column, index) => <div className={styles.column} key={index}>{column.map(([icon, title, description, href]) => <Link href={href} onClick={onNavigate} key={title} className={styles.item}><Icon name={icon} /><span><strong>{title}</strong><small>{description}</small></span><span className={styles.chevron} aria-hidden="true">›</span></Link>)}</div>)}</div>
       <aside className={styles.feature}>
