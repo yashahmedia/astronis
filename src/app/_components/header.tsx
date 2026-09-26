@@ -64,7 +64,7 @@ const navigation = [
     href: "/services",
     items: practices.map((service) => ({
       title: service.title,
-      href: "/services/" + service.slug,
+      href: "/services/" + service.canonicalSlug,
     })),
   },
   {

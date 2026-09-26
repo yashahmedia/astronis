@@ -33,7 +33,7 @@ export default function ServicesMenu({ id, onNavigate }: { id: string; onNavigat
           <div className={styles.links}>{group.slugs.map((slug) => {
             const practice = bySlug.get(slug);
             if (!practice || !matches(practice)) return null;
-            const href = `/services/${practice.slug}`;
+            const href = `/services/${practice.canonicalSlug}`;
             return <Link href={href} key={slug} onClick={onNavigate} className={isRouteActive(pathname, href) ? "active-submenu-item" : undefined}><span><strong>{practice.title}</strong><small>{practice.description}</small></span><Icon name="arrow" /></Link>;
           })}</div>
           {group.title === "People, Risk & Sustainability" && !term && <Link className={styles.model} href="/services" onClick={onNavigate}><span>Our integrated model</span><strong>Corporate × Regulatory<br />Legal × Business Advisory</strong><small>Connected advice for complex business decisions.</small><em>Discover our approach <Icon name="arrow" /></em></Link>}

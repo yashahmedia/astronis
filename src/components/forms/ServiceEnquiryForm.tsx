@@ -36,9 +36,10 @@ const inferServiceFromPath = (pathname: string) => {
   return serviceFormConfig.find((service) => service.id === slug || service.label.toLowerCase().replace(/[^a-z0-9]+/g, "-") === slug)?.label || "";
 };
 
-export default function ServiceEnquiryForm({ defaultService = "" }: { defaultService?: string }) {
+export default function ServiceEnquiryForm({ defaultService = "", defaultRequirement = "" }: { defaultService?: string; defaultRequirement?: string }) {
   const pathname = usePathname();
-  const resolvedService = defaultService || inferServiceFromPath(pathname || "");
+  const resolvedService = serviceFormConfig.find(service => service.label === defaultService)?.label || inferServiceFromPath(pathname || "");
+  const resolvedRequirement = serviceFormConfig.find(service => service.label === resolvedService)?.requirements.find(requirement => requirement.label === defaultRequirement)?.label || "";
   const [form, setForm] = useState({
     fullName: "",
     businessEmail: "",
@@ -48,7 +49,7 @@ export default function ServiceEnquiryForm({ defaultService = "" }: { defaultSer
     service: resolvedService,
     country: "India",
     city: "",
-    requirement: "",
+    requirement: resolvedRequirement,
     detailQuestion: "",
     detailAnswer: "",
     requirementDescription: "",
@@ -152,7 +153,7 @@ export default function ServiceEnquiryForm({ defaultService = "" }: { defaultSer
         service: resolvedService,
         country: "India",
         city: "",
-        requirement: "",
+        requirement: resolvedRequirement,
         detailQuestion: "",
         detailAnswer: "",
         requirementDescription: "",

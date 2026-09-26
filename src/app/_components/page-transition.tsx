@@ -34,7 +34,8 @@ export default function PageTransition({ children }: { children: React.ReactNode
       return;
     }
 
-    window.scrollTo(0, 0);
+    // Preserve cross-page anchor navigation; destination content owns its offset.
+    if (!window.location.hash) window.scrollTo(0, 0);
     root.classList.add("is-navigating");
     const frame = requestAnimationFrame(() => {
       root.classList.remove("is-navigating");

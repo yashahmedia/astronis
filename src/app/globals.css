@@ -2836,6 +2836,14 @@ textarea::placeholder {
     font-size: 63px;
   }
 }
+/* Compact desktop navigation before its contents exceed the viewport. */
+@media (min-width: 1251px) and (max-width: 1350px) {
+  .nav-shell { gap: 20px; }
+  .brand { flex-basis: 180px; }
+  .brand img { width: 180px; }
+  .navigation { gap: 12px; font-size: 12px; }
+  .nav-cta { padding: 12px; font-size: 12px; }
+}
 @media (max-width: 1250px) {
   .container {
     width: calc(100% - 56px);

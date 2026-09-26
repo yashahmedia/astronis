@@ -1,0 +1,978 @@
+[
+  {
+    "title": "Corporate & Commercial",
+    "sourceRow": 4,
+    "subServices": [
+      {
+        "title": "Entity Formation & Business Setup",
+        "children": [
+          "Private Limited Company Incorporation",
+          "One Person Company (OPC)",
+          "Public Limited Company",
+          "Section 8 Company",
+          "LLP Formation",
+          "Partnership Firm",
+          "Proprietorship",
+          "Wholly Owned Subsidiary",
+          "Foreign Company Setup",
+          "Branch Office",
+          "Liaison Office",
+          "Project Office"
+        ],
+        "sourceRow": 6
+      },
+      {
+        "title": "Entity Structuring & Group Reorganisation",
+        "children": [
+          "Entity Structuring",
+          "Group Structuring",
+          "Holding & Subsidiary Structures",
+          "Shareholding Structuring",
+          "Capital Structuring",
+          "Business Reorganisation",
+          "Corporate Conversion",
+          "Succession & Family Business Structuring"
+        ],
+        "sourceRow": 19
+      },
+      {
+        "title": "Mergers, Acquisitions & Transactions",
+        "children": [
+          "Mergers & Acquisitions",
+          "Buy-Side Advisory",
+          "Sell-Side Advisory",
+          "Transaction Structuring",
+          "Legal Due Diligence",
+          "Corporate Due Diligence",
+          "Transaction Documentation",
+          "Private Equity Transactions",
+          "Investment Transactions",
+          "Closing & Post-Closing Support"
+        ],
+        "sourceRow": 28
+      },
+      {
+        "title": "Corporate Governance",
+        "children": [
+          "Board Advisory",
+          "Governance Framework",
+          "Shareholder Matters",
+          "Board & Committee Processes",
+          "Corporate Policies",
+          "Governance Review",
+          "Governance Due Diligence"
+        ],
+        "sourceRow": 39
+      },
+      {
+        "title": "Commercial Contracts",
+        "children": [
+          "Contract Drafting",
+          "Contract Review",
+          "Contract Negotiation",
+          "Shareholders' Agreements",
+          "Share Subscription Agreements",
+          "Joint Venture Agreements",
+          "Investment Agreements",
+          "Vendor / Supply Agreements",
+          "Distribution Agreements",
+          "Franchise Agreements",
+          "NDAs",
+          "Employment / Consultancy Agreements",
+          "Contract Management"
+        ],
+        "sourceRow": 47
+      },
+      {
+        "title": "Corporate Restructuring",
+        "children": [
+          "Merger",
+          "Demerger",
+          "Amalgamation",
+          "Capital Restructuring",
+          "Business Transfer",
+          "Slump Sale",
+          "Internal Reorganisation",
+          "Conversion",
+          "Corporate Closure / Exit"
+        ],
+        "sourceRow": 61
+      }
+    ]
+  },
+  {
+    "title": "Regulatory Services",
+    "sourceRow": 71,
+    "subServices": [
+      {
+        "title": "Corporate Regulatory",
+        "children": [
+          "Companies Act Advisory",
+          "MCA / ROC Matters",
+          "Statutory Filings",
+          "Corporate Compliance",
+          "Regulatory Approvals",
+          "Compounding / Regularisation",
+          "Beneficial Ownership Compliance"
+        ],
+        "sourceRow": 72
+      },
+      {
+        "title": "Regulatory Compliance",
+        "children": [
+          "Compliance Framework",
+          "Regulatory Compliance Review",
+          "Compliance Calendar",
+          "Regulatory Risk Assessment",
+          "Regulatory Change Management",
+          "Ongoing Compliance Support"
+        ],
+        "sourceRow": 80
+      },
+      {
+        "title": "Financial Regulatory",
+        "children": [
+          "RBI Regulatory Advisory",
+          "SEBI Regulatory Advisory",
+          "NBFC Regulatory Advisory",
+          "FinTech Regulatory",
+          "Payment & Digital Finance Regulatory",
+          "Financial Services Regulatory"
+        ],
+        "sourceRow": 87
+      },
+      {
+        "title": "Sector Regulatory",
+        "children": [
+          "Food & Consumer Regulatory",
+          "Healthcare / Medical Device Regulatory",
+          "Pharmaceutical Regulatory",
+          "Telecom / WPC",
+          "Environmental Regulatory",
+          "Product Regulatory",
+          "Legal Metrology",
+          "BIS / Standards Compliance"
+        ],
+        "sourceRow": 94
+      }
+    ]
+  },
+  {
+    "title": "Litigation & Dispute Resolution",
+    "sourceRow": 104,
+    "subServices": [
+      {
+        "title": "Civil & Commercial",
+        "children": [
+          "Civil Litigation",
+          "Commercial Litigation",
+          "Contractual Disputes",
+          "Corporate Disputes",
+          "Shareholder Disputes",
+          "Property Disputes",
+          "Defamation"
+        ],
+        "sourceRow": 105
+      },
+      {
+        "title": "Corporate / Tribunal",
+        "children": [
+          "NCLT",
+          "NCLAT",
+          "Insolvency-related Proceedings",
+          "Company Law Disputes"
+        ],
+        "sourceRow": 113
+      },
+      {
+        "title": "Banking & Recovery",
+        "children": [
+          "DRT",
+          "DRAT",
+          "SARFAESI",
+          "Debt Recovery",
+          "Banking Disputes"
+        ],
+        "sourceRow": 118
+      },
+      {
+        "title": "Arbitration & ADR",
+        "children": [
+          "Domestic Arbitration",
+          "Institutional Arbitration",
+          "MSME Arbitration",
+          "Conciliation",
+          "Mediation",
+          "Enforcement of Awards",
+          "Challenge to Arbitral Awards"
+        ],
+        "sourceRow": 124
+      },
+      {
+        "title": "Specialised Forums",
+        "children": [
+          "MSME / MSEFC",
+          "Consumer Commissions",
+          "RERA",
+          "TDSAT"
+        ],
+        "sourceRow": 132
+      },
+      {
+        "title": "Criminal / Economic Offences",
+        "children": [
+          "Corporate Criminal Matters",
+          "NI Act",
+          "PMLA",
+          "Economic Offences",
+          "White-Collar Matters",
+          "Regulatory Investigations"
+        ],
+        "sourceRow": 137
+      }
+    ]
+  },
+  {
+    "title": "Business Advisory",
+    "sourceRow": 144,
+    "subServices": [
+      {
+        "title": "Business Strategy",
+        "children": [
+          "Business Strategy",
+          "Growth Advisory",
+          "Market Entry",
+          "Business Expansion",
+          "Business Transformation",
+          "Strategic Planning"
+        ],
+        "sourceRow": 145
+      },
+      {
+        "title": "Startup Advisory",
+        "children": [
+          "Startup Structuring",
+          "Founder Advisory",
+          "Startup India / DPIIT Support",
+          "Investment Readiness",
+          "ESOP Advisory",
+          "Fundraising Support",
+          "Startup Compliance"
+        ],
+        "sourceRow": 152
+      },
+      {
+        "title": "Investment & Transaction Advisory",
+        "children": [
+          "Investment Advisory",
+          "Fundraising Advisory",
+          "Investor Coordination",
+          "Deal Advisory",
+          "Commercial Due Diligence",
+          "Transaction Support"
+        ],
+        "sourceRow": 160
+      },
+      {
+        "title": "Management Advisory",
+        "children": [
+          "Organisational Structuring",
+          "Business Process Advisory",
+          "Management Systems",
+          "Operational Advisory",
+          "Governance & Management Framework"
+        ],
+        "sourceRow": 167
+      },
+      {
+        "title": "India Entry Advisory",
+        "children": [
+          "India Entry Strategy",
+          "Entity Selection",
+          "Regulatory Mapping",
+          "Investment Structuring",
+          "Establishment Support",
+          "Ongoing Business Support"
+        ],
+        "sourceRow": 173
+      }
+    ]
+  },
+  {
+    "title": "Licensing & Registrations",
+    "sourceRow": 180,
+    "subServices": [
+      {
+        "title": "Business Registrations",
+        "children": [
+          "Udyam / MSME",
+          "IEC",
+          "Shops & Establishment",
+          "Trade Licence",
+          "Professional / Local Registrations"
+        ],
+        "sourceRow": 182
+      },
+      {
+        "title": "Food & Consumer",
+        "children": [
+          "FSSAI",
+          "Legal Metrology",
+          "Packaging & Labelling",
+          "Product Compliance"
+        ],
+        "sourceRow": 188
+      },
+      {
+        "title": "Product / Industrial",
+        "children": [
+          "BIS",
+          "ISI",
+          "WPC",
+          "EPR",
+          "Pollution / Environmental Permissions",
+          "Factory / Industrial Approvals",
+          "Other Sector Licences"
+        ],
+        "sourceRow": 193
+      },
+      {
+        "title": "NGO / Institutional",
+        "children": [
+          "Trust",
+          "Society",
+          "Section 8 Company",
+          "NGO Darpan",
+          "FCRA",
+          "CSR-related Registrations"
+        ],
+        "sourceRow": 201
+      }
+    ]
+  },
+  {
+    "title": "Intellectual Property",
+    "sourceRow": 209,
+    "subServices": [
+      {
+        "title": "Trademark",
+        "children": [
+          "Trademark Search",
+          "Trademark Application",
+          "Examination Response",
+          "Show-Cause Hearing",
+          "Opposition",
+          "Renewal",
+          "Assignment",
+          "Licensing",
+          "Enforcement"
+        ],
+        "sourceRow": 210
+      },
+      {
+        "title": "Copyright",
+        "children": [
+          "Copyright Registration",
+          "Assignment",
+          "Licensing",
+          "Enforcement"
+        ],
+        "sourceRow": 220
+      },
+      {
+        "title": "Designs",
+        "children": [
+          "Design Registration",
+          "Renewal",
+          "Assignment",
+          "Enforcement"
+        ],
+        "sourceRow": 225
+      },
+      {
+        "title": "Patents",
+        "children": [
+          "Patent Advisory",
+          "Patent Search",
+          "Patent Filing / Prosecution through appropriately qualified professionals",
+          "Patent Documentation",
+          "Portfolio Support"
+        ],
+        "sourceRow": 230
+      },
+      {
+        "title": "IP & Brand Advisory",
+        "children": [
+          "IP Due Diligence",
+          "IP Portfolio Management",
+          "Brand Protection",
+          "Licensing",
+          "Assignment",
+          "Franchise IP",
+          "IP Enforcement Strategy"
+        ],
+        "sourceRow": 236
+      }
+    ]
+  },
+  {
+    "title": "FEMA, FDI & Cross-Border",
+    "sourceRow": 244,
+    "subServices": [
+      {
+        "title": "FEMA",
+        "children": [
+          "FEMA Advisory",
+          "FEMA Compliance",
+          "RBI Reporting",
+          "Foreign Exchange Transactions"
+        ],
+        "sourceRow": 245
+      },
+      {
+        "title": "FDI",
+        "children": [
+          "FDI Structuring",
+          "Entry Route Advisory",
+          "Foreign Investment Compliance",
+          "Share Issue / Transfer",
+          "Downstream Investment",
+          "Repatriation / Exit"
+        ],
+        "sourceRow": 250
+      },
+      {
+        "title": "ODI",
+        "children": [
+          "Overseas Direct Investment",
+          "Overseas Subsidiary",
+          "Overseas Joint Venture",
+          "ODI Reporting & Compliance"
+        ],
+        "sourceRow": 257
+      },
+      {
+        "title": "ECB",
+        "children": [
+          "External Commercial Borrowing",
+          "ECB Structuring",
+          "FEMA/RBI Compliance",
+          "ECB Reporting"
+        ],
+        "sourceRow": 262
+      },
+      {
+        "title": "Cross-Border",
+        "children": [
+          "Cross-Border Corporate Structuring",
+          "Cross-Border M&A",
+          "International Joint Ventures",
+          "Foreign Collaboration",
+          "India Entry",
+          "Overseas Expansion"
+        ],
+        "sourceRow": 267
+      }
+    ]
+  },
+  {
+    "title": "Taxation & Compliance",
+    "sourceRow": 275,
+    "subServices": [
+      {
+        "title": "Direct Tax",
+        "children": [
+          "Corporate Tax",
+          "Income Tax",
+          "TDS",
+          "Tax Compliance",
+          "Tax Advisory",
+          "Tax Representation"
+        ],
+        "sourceRow": 276
+      },
+      {
+        "title": "GST & Indirect Tax",
+        "children": [
+          "GST Registration",
+          "GST Advisory",
+          "GST Returns",
+          "GST Notices",
+          "GST Refunds",
+          "GST Disputes"
+        ],
+        "sourceRow": 283
+      },
+      {
+        "title": "Transaction Tax",
+        "children": [
+          "M&A Tax Coordination",
+          "Investment Structuring",
+          "Restructuring Tax Coordination"
+        ],
+        "sourceRow": 290
+      },
+      {
+        "title": "International Tax",
+        "children": [
+          "Cross-Border Tax Coordination",
+          "Transfer Pricing Coordination",
+          "International Transaction Support"
+        ],
+        "sourceRow": 294
+      }
+    ]
+  },
+  {
+    "title": "Banking, RBI & Financial Services",
+    "sourceRow": 298,
+    "subServices": [
+      {
+        "title": "Banking Advisory",
+        "children": [],
+        "sourceRow": 300
+      },
+      {
+        "title": "RBI Regulatory",
+        "children": [],
+        "sourceRow": 301
+      },
+      {
+        "title": "NBFC Formation / Licensing Advisory",
+        "children": [],
+        "sourceRow": 302
+      },
+      {
+        "title": "NBFC Compliance",
+        "children": [],
+        "sourceRow": 303
+      },
+      {
+        "title": "FinTech",
+        "children": [],
+        "sourceRow": 304
+      },
+      {
+        "title": "Payment Systems",
+        "children": [],
+        "sourceRow": 305
+      },
+      {
+        "title": "Financial Services Regulatory",
+        "children": [],
+        "sourceRow": 306
+      },
+      {
+        "title": "Banking Documentation",
+        "children": [],
+        "sourceRow": 307
+      },
+      {
+        "title": "Loan / Security Documentation",
+        "children": [],
+        "sourceRow": 308
+      },
+      {
+        "title": "Debt & Restructuring Advisory",
+        "children": [],
+        "sourceRow": 309
+      },
+      {
+        "title": "Financial Institution Advisory",
+        "children": [],
+        "sourceRow": 310
+      }
+    ]
+  },
+  {
+    "title": "Insolvency & Restructuring",
+    "sourceRow": 311,
+    "subServices": [
+      {
+        "title": "IBC Advisory",
+        "children": [],
+        "sourceRow": 312
+      },
+      {
+        "title": "Insolvency Strategy",
+        "children": [],
+        "sourceRow": 313
+      },
+      {
+        "title": "CIRP-related Advisory",
+        "children": [],
+        "sourceRow": 314
+      },
+      {
+        "title": "Creditor Advisory",
+        "children": [],
+        "sourceRow": 315
+      },
+      {
+        "title": "Debtor Advisory",
+        "children": [],
+        "sourceRow": 316
+      },
+      {
+        "title": "Resolution Planning Support",
+        "children": [],
+        "sourceRow": 317
+      },
+      {
+        "title": "NCLT / NCLAT Proceedings",
+        "children": [],
+        "sourceRow": 318
+      },
+      {
+        "title": "Debt Restructuring",
+        "children": [],
+        "sourceRow": 319
+      },
+      {
+        "title": "Distressed Business Advisory",
+        "children": [],
+        "sourceRow": 320
+      },
+      {
+        "title": "Liquidation / Closure Support",
+        "children": [],
+        "sourceRow": 321
+      }
+    ]
+  },
+  {
+    "title": "HR, Employment & Labour",
+    "sourceRow": 322,
+    "subServices": [
+      {
+        "title": "Employment Advisory",
+        "children": [],
+        "sourceRow": 323
+      },
+      {
+        "title": "Employment Contracts",
+        "children": [],
+        "sourceRow": 324
+      },
+      {
+        "title": "HR Policies",
+        "children": [],
+        "sourceRow": 325
+      },
+      {
+        "title": "Employee Handbook",
+        "children": [],
+        "sourceRow": 326
+      },
+      {
+        "title": "Labour Law Compliance",
+        "children": [],
+        "sourceRow": 327
+      },
+      {
+        "title": "POSH Advisory",
+        "children": [],
+        "sourceRow": 328
+      },
+      {
+        "title": "Employee Disputes",
+        "children": [],
+        "sourceRow": 329
+      },
+      {
+        "title": "Termination / Separation Advisory",
+        "children": [],
+        "sourceRow": 330
+      },
+      {
+        "title": "Workplace Investigations",
+        "children": [],
+        "sourceRow": 331
+      },
+      {
+        "title": "HR Compliance Review",
+        "children": [],
+        "sourceRow": 332
+      },
+      {
+        "title": "Payroll / Statutory Coordination",
+        "children": [],
+        "sourceRow": 333
+      }
+    ]
+  },
+  {
+    "title": "Risk, Forensics & Investigations",
+    "sourceRow": 334,
+    "subServices": [
+      {
+        "title": "Enterprise Risk Advisory",
+        "children": [],
+        "sourceRow": 336
+      },
+      {
+        "title": "Internal Controls",
+        "children": [],
+        "sourceRow": 337
+      },
+      {
+        "title": "Fraud Risk",
+        "children": [],
+        "sourceRow": 338
+      },
+      {
+        "title": "Forensic Review",
+        "children": [],
+        "sourceRow": 339
+      },
+      {
+        "title": "Corporate Investigations",
+        "children": [],
+        "sourceRow": 340
+      },
+      {
+        "title": "Financial Investigations",
+        "children": [],
+        "sourceRow": 341
+      },
+      {
+        "title": "Compliance Investigations",
+        "children": [],
+        "sourceRow": 342
+      },
+      {
+        "title": "Due Diligence / Background Review",
+        "children": [],
+        "sourceRow": 343
+      },
+      {
+        "title": "White-Collar Advisory",
+        "children": [],
+        "sourceRow": 344
+      },
+      {
+        "title": "Anti-Bribery / Ethics Framework",
+        "children": [],
+        "sourceRow": 345
+      }
+    ]
+  },
+  {
+    "title": "ESG & Sustainability",
+    "sourceRow": 346,
+    "subServices": [
+      {
+        "title": "ESG Advisory",
+        "children": [],
+        "sourceRow": 347
+      },
+      {
+        "title": "ESG Strategy",
+        "children": [],
+        "sourceRow": 348
+      },
+      {
+        "title": "Sustainability Framework",
+        "children": [],
+        "sourceRow": 349
+      },
+      {
+        "title": "ESG Compliance",
+        "children": [],
+        "sourceRow": 350
+      },
+      {
+        "title": "Environmental Regulatory",
+        "children": [],
+        "sourceRow": 351
+      },
+      {
+        "title": "Governance Advisory",
+        "children": [],
+        "sourceRow": 352
+      },
+      {
+        "title": "ESG Risk Assessment",
+        "children": [],
+        "sourceRow": 353
+      },
+      {
+        "title": "ESG Due Diligence",
+        "children": [],
+        "sourceRow": 354
+      },
+      {
+        "title": "Sustainability Reporting Coordination",
+        "children": [],
+        "sourceRow": 355
+      },
+      {
+        "title": "Responsible Business Advisory",
+        "children": [],
+        "sourceRow": 356
+      }
+    ]
+  },
+  {
+    "title": "Technology, Privacy & Digital",
+    "sourceRow": 357,
+    "subServices": [
+      {
+        "title": "Data Protection & Privacy",
+        "children": [],
+        "sourceRow": 359
+      },
+      {
+        "title": "DPDP Compliance",
+        "children": [],
+        "sourceRow": 360
+      },
+      {
+        "title": "Privacy Policies",
+        "children": [],
+        "sourceRow": 361
+      },
+      {
+        "title": "Technology Contracts",
+        "children": [],
+        "sourceRow": 362
+      },
+      {
+        "title": "SaaS Agreements",
+        "children": [],
+        "sourceRow": 363
+      },
+      {
+        "title": "IT Agreements",
+        "children": [],
+        "sourceRow": 364
+      },
+      {
+        "title": "Data Processing Agreements",
+        "children": [],
+        "sourceRow": 365
+      },
+      {
+        "title": "Cybersecurity Regulatory Advisory",
+        "children": [],
+        "sourceRow": 366
+      },
+      {
+        "title": "E-Commerce Regulatory",
+        "children": [],
+        "sourceRow": 367
+      },
+      {
+        "title": "Digital Business Advisory",
+        "children": [],
+        "sourceRow": 368
+      },
+      {
+        "title": "FinTech Regulatory",
+        "children": [],
+        "sourceRow": 369
+      },
+      {
+        "title": "Technology Transactions",
+        "children": [],
+        "sourceRow": 370
+      },
+      {
+        "title": "AI Governance & Regulatory Advisory",
+        "children": [],
+        "sourceRow": 371
+      }
+    ]
+  },
+  {
+    "title": "Professional & Sector-Specific Advisory",
+    "sourceRow": 372,
+    "subServices": [
+      {
+        "title": "Healthcare Regulatory",
+        "children": [],
+        "sourceRow": 374
+      },
+      {
+        "title": "Pharmaceuticals",
+        "children": [],
+        "sourceRow": 375
+      },
+      {
+        "title": "Food & Drugs",
+        "children": [],
+        "sourceRow": 376
+      },
+      {
+        "title": "Real Estate / RERA",
+        "children": [],
+        "sourceRow": 377
+      },
+      {
+        "title": "Infrastructure & Projects",
+        "children": [],
+        "sourceRow": 378
+      },
+      {
+        "title": "Education",
+        "children": [],
+        "sourceRow": 379
+      },
+      {
+        "title": "Hospitality",
+        "children": [],
+        "sourceRow": 380
+      },
+      {
+        "title": "Media & Broadcasting",
+        "children": [],
+        "sourceRow": 381
+      },
+      {
+        "title": "Telecommunications",
+        "children": [],
+        "sourceRow": 382
+      },
+      {
+        "title": "E-Commerce",
+        "children": [],
+        "sourceRow": 383
+      },
+      {
+        "title": "Manufacturing",
+        "children": [],
+        "sourceRow": 384
+      },
+      {
+        "title": "Automotive",
+        "children": [],
+        "sourceRow": 385
+      },
+      {
+        "title": "Logistics",
+        "children": [],
+        "sourceRow": 386
+      },
+      {
+        "title": "Energy",
+        "children": [],
+        "sourceRow": 387
+      },
+      {
+        "title": "Environment",
+        "children": [],
+        "sourceRow": 388
+      },
+      {
+        "title": "Defence / Marine",
+        "children": [],
+        "sourceRow": 389
+      },
+      {
+        "title": "Other Sector-Specific Regulatory Advisory",
+        "children": [],
+        "sourceRow": 390
+      }
+    ]
+  }
+]
