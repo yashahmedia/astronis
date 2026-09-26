@@ -83,10 +83,8 @@ export default function IndustriesMenu({ id, onNavigate }: { id: string; onNavig
       <div className={styles.quickLinks}>
         <Link href="/industries" onClick={onNavigate} className={isRouteActive(pathname, "/industries") ? "active-submenu-item" : undefined}><Icon name="globe" /><span><strong>Explore All Industries</strong><small>View complete industry directory</small></span><Icon name="arrow" /></Link>
         <Link href="/insights" onClick={onNavigate} className={isRouteActive(pathname, "/insights") ? "active-submenu-item" : undefined}><Icon name="file" /><span><strong>Industry Insights</strong><small>Articles, guides and publications</small></span><Icon name="arrow" /></Link>
-        <Link href="/insights/legal-updates" onClick={onNavigate} className={isRouteActive(pathname, "/insights/legal-updates") ? "active-submenu-item" : undefined}><Icon name="document" /><span><strong>Regulatory Updates</strong><small>Latest developments by sector</small></span><Icon name="arrow" /></Link>
         <Link href="/professionals" onClick={onNavigate} className={isRouteActive(pathname, "/professionals") ? "active-submenu-item" : undefined}><Icon name="search" /><span><strong>Find a Professional</strong><small>Connect with our experts</small></span><Icon name="arrow" /></Link>
       </div>
-      <Link className={styles.contact} href="/contact" onClick={onNavigate}><Icon name="mail" /><span><strong>Discuss Your Industry Requirement</strong><small>Get tailored advisory support</small></span><Icon name="arrow" /></Link>
       <div className={styles.sidebarBottom}><Icon name="globe" /><span>GLOBAL PERSPECTIVE.<br /><strong>Industry focus.</strong></span></div>
     </aside>
   </div>;
