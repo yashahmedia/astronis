@@ -72,6 +72,6 @@ export default function InsightsMenu({ id, onNavigate }: { id: string; onNavigat
       </section>)}</div>
       <aside className={styles.feature}><div className={styles.featureImage} role="img" aria-label="Legal and business insights workspace" /><div className={styles.featureCopy}><span className={styles.eyebrow}>Knowledge that empowers.</span><h2>From Insight<br />to Impact.</h2><Link href="/insights" onClick={onNavigate} className={isRouteActive(pathname, "/insights") ? "active-submenu-item" : undefined}>Explore All Insights <Icon name="arrow" /></Link></div></aside>
     </div>
-    <div className={styles.footer}>{footerLinks.map(([icon, title, description, href]) => <Link href={href} onClick={onNavigate} key={title} className={isRouteActive(pathname, href) ? "active-submenu-item" : undefined}><Icon name={icon} /><span><strong>{title}</strong><small>{description}</small></span><span className={styles.chevron} aria-hidden="true">›</span></Link>)}</div>
+    <div className={styles.footer}>{footerLinks.map(([icon, title, description, href]) => <Link href={href} onClick={onNavigate} key={title} className={isRouteActive(pathname, href) ? "active-submenu-item" : undefined}><span className={styles.quickIcon}><Icon name={icon} /></span><span className={styles.quickCopy}><strong>{title}</strong><small>{description}</small></span><span className={styles.quickArrow} aria-hidden="true"><Icon name="arrow" /></span></Link>)}</div>
   </div>;
 }
