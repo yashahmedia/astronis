@@ -234,3 +234,9 @@
 	.footer a:last-child { border-bottom: 0; }
 }
 
+.menu {
+	max-height: calc(100dvh - 120px) !important;
+	overflow-x: hidden !important;
+	overflow-y: auto !important;
+}
+
