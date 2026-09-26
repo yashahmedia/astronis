@@ -64,6 +64,6 @@ export default function GlobalPresenceMenu({ id, onNavigate }: { id: string; onN
         {opportunities.map(([icon, title, description, href]) => <Link href={href} onClick={onNavigate} key={title} className={`${styles.opportunity} ${isRouteActive(pathname, href) ? "active-submenu-item" : ""}`.trim()}><Icon name={icon} /><span><strong>{title}</strong><small>{description}</small></span><Icon name="arrow" /></Link>)}
       </section>
     </div>
-    <div className={styles.footer}>{quickLinks.map(([icon, title, description, href]) => <Link href={href} onClick={onNavigate} key={title} className={isRouteActive(pathname, href) ? "active-submenu-item" : undefined}><Icon name={icon} /><span><strong>{title}</strong><small>{description}</small></span></Link>)}</div>
+    <div className={styles.footer}>{quickLinks.map(([icon, title, description, href]) => <Link href={href} onClick={onNavigate} key={title} className={isRouteActive(pathname, href) ? "active-submenu-item" : undefined} aria-current={isRouteActive(pathname, href) ? "page" : undefined}><span className={styles.quickIcon}><Icon name={icon} /></span><span className={styles.quickCopy}><strong>{title}</strong><small>{description}</small></span><span className={styles.quickArrow} aria-hidden="true"><Icon name="arrow" /></span></Link>)}</div>
   </div>;
 }
