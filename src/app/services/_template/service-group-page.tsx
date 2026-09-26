@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { practicePath, type DetailedChildService, type DetailedServiceGroup, type ServicePractice } from "@/data/service-detail-types";
+import ChildEnquiryLink from "./child-enquiry-link";
 import ServiceHero from "./service-hero";
 import SectionNavigation from "./section-navigation";
 import ServiceSupport, { GroupPagination } from "./service-support";
@@ -11,7 +12,7 @@ function ChildServiceSection({ child, index }: { child: DetailedChildService; in
     {child.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
     <div className={styles.coverage}><h3>What this service covers</h3><ul>{child.covers.map(item => <li key={item}><span aria-hidden="true">↗</span>{item}</li>)}</ul></div>
     <div className={styles.considerations}><div><h3>When businesses typically need it</h3><p>{child.when}</p></div><div><h3>Key considerations</h3><p>{child.considerations}</p></div></div>
-    <div className={styles.assistance}><h3>How Astronis can assist</h3><p>{child.assistance}</p><Link href="#enquiry">Discuss this requirement <span aria-hidden="true">→</span></Link></div>
+    <div className={styles.assistance}><h3>How Astronis can assist</h3><p>{child.assistance}</p><ChildEnquiryLink title={child.title} /></div>
   </section>;
 }
 

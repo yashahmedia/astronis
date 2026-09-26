@@ -8,6 +8,7 @@ export type ChildServiceContent = {
 
 export type DetailedChildService = ChildServiceContent & { title: string; slug: string };
 export type DetailedServiceGroup = {
+  seoTitle?: string;
   title: string;
   slug: string;
   shortTitle: string;
@@ -22,6 +23,14 @@ export type DetailedServiceGroup = {
 };
 
 export type ServicePractice = {
+  seoTitle?: string;
+  heroEyebrow?: string;
+  introEyebrow?: string;
+  visual?: "regulatory";
+  darkGroupIndex?: number;
+  knowledgeCTA?: string;
+  knowledgeLinks?: {title: string; href: string}[];
+  finalSecondaryCTA?: string;
   title: string;
   slug: string;
   aliases: string[];

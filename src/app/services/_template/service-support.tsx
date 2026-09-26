@@ -16,7 +16,7 @@ export function RelatedServices({ practice, group }: { practice: ServicePractice
 }
 
 export function KnowledgeCentreBlock({ practice }: { practice: ServicePractice }) {
-  return <section className={styles.knowledge}><div className={`container ${styles.knowledgeGrid}`}><div><span className={styles.eyebrow}>INFORMATION THAT SUPPORTS ACTION</span><h2>{practice.knowledgeTitle}</h2><p>Practical reading and resources to prepare for your next business decision.</p><ServiceButton href="/knowledge-centre" secondary>Explore Knowledge Centre</ServiceButton></div><div className={styles.resourceLinks}>{[["Guides","/resources/business-guides"],["Regulatory Updates","/insights/legal-updates"],["FAQs","/faqs"],["Checklists","/resources/compliance-checklists"],["Articles","/insights/articles"],["Templates / Resources","/resources/downloads"]].map(([title,href],index) => <Link key={title} href={href}><span>0{index+1}</span>{title}<span aria-hidden="true">↗</span></Link>)}</div></div></section>;
+  return <section className={styles.knowledge}><div className={`container ${styles.knowledgeGrid}`}><div><span className={styles.eyebrow}>INFORMATION THAT SUPPORTS ACTION</span><h2>{practice.knowledgeTitle}</h2><p>Practical reading and resources to prepare for your next business decision.</p><ServiceButton href="/knowledge-centre" secondary>{practice.knowledgeCTA || "Explore Knowledge Centre"}</ServiceButton></div><div className={styles.resourceLinks}>{(practice.knowledgeLinks?.map(item => [item.title,item.href]) || [["Guides","/resources/business-guides"],["Regulatory Updates","/insights/legal-updates"],["FAQs","/faqs"],["Checklists","/resources/compliance-checklists"],["Articles","/insights/articles"],["Templates / Resources","/resources/downloads"]]).map(([title,href],index) => <Link key={title} href={href}><span>0{index+1}</span>{title}<span aria-hidden="true">↗</span></Link>)}</div></div></section>;
 }
 
 export function ServiceEnquiryCTA({ practice, group }: { practice: ServicePractice; group?: DetailedServiceGroup }) {
@@ -24,7 +24,7 @@ export function ServiceEnquiryCTA({ practice, group }: { practice: ServicePracti
 }
 
 export function ServiceFinalCTA({ practice }: { practice: ServicePractice }) {
-  return <section className={styles.final}><div className="container"><span className={styles.eyebrow}>A CLEARER PATH FORWARD</span><h2>{practice.finalHeading}</h2><p>{practice.finalDescription}</p><ServiceButton href="#enquiry">Speak With an Advisor</ServiceButton></div></section>;
+  return <section className={styles.final}><div className="container"><span className={styles.eyebrow}>A CLEARER PATH FORWARD</span><h2>{practice.finalHeading}</h2><p>{practice.finalDescription}</p>{practice.finalSecondaryCTA ? <div className={`${styles.actions} ${styles.finalActions}`}><ServiceButton href="#enquiry">Speak With an Advisor</ServiceButton><ServiceButton href="#enquiry" secondary>{practice.finalSecondaryCTA}</ServiceButton></div> : <ServiceButton href="#enquiry">Speak With an Advisor</ServiceButton>}</div></section>;
 }
 
 export function GroupPagination({ practice, group }: { practice: ServicePractice; group: DetailedServiceGroup }) {
@@ -35,5 +35,5 @@ export function GroupPagination({ practice, group }: { practice: ServicePractice
 }
 
 export default function ServiceSupport({ practice, group }: { practice: ServicePractice; group?: DetailedServiceGroup }) {
-  return <><ServiceExperts practice={practice} /><RelatedServices practice={practice} group={group} /><div className={hub.page}><RelatedInsights /></div><KnowledgeCentreBlock practice={practice} /><ServiceEnquiryCTA practice={practice} group={group} /><ServiceFinalCTA practice={practice} /></>;
+  return <><ServiceExperts practice={practice} /><RelatedServices practice={practice} group={group} /><div className={hub.page}><RelatedInsights {...(practice.visual === "regulatory" ? {title:"Regulatory Insights",articles:[]} : {})} /></div><KnowledgeCentreBlock practice={practice} /><ServiceEnquiryCTA practice={practice} group={group} /><ServiceFinalCTA practice={practice} /></>;
 }

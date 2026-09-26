@@ -7,18 +7,19 @@ import styles from "./hub.module.css";
 
 type Article = (typeof corporateArticles)[number] & { publishedAt?: string };
 
-export default function RelatedInsights({ articles = corporateArticles.slice(0, 3) }: { articles?: Article[] }) {
+export default function RelatedInsights({ articles = corporateArticles.slice(0, 3), title = "Insights Related to Our Services" }: { articles?: Article[]; title?: string }) {
   return (
     <section className={`${styles.section} ${styles.insightsSection}`} aria-labelledby="related-insights-title">
       <div className="container">
         <div className={styles.sectionHeading}>
           <div>
             <span className={styles.eyebrow}>PERSPECTIVES FOR DECISION-MAKERS</span>
-            <h2 id="related-insights-title">Insights Related to Our Services</h2>
+            <h2 id="related-insights-title">{title}</h2>
             <p className={styles.insightsIntro}>Considered perspectives. Practical guidance. A clearer view of your next business decision.</p>
           </div>
           <Action href="/insights" secondary>All Insights</Action>
         </div>
+        {articles.length === 0 && <p>Explore our regulatory updates and resources in the <Link href="/insights/legal-updates">Insights centre</Link>. Browse the available updates and guidance to prepare for your next regulatory discussion.</p>}
         <div className={styles.grid}>
           {articles.map((article, index) => {
             const words = article.sections.flat().join(" ").trim().split(/\s+/).length;

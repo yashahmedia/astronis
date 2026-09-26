@@ -9,10 +9,11 @@ export const practices = [
     icon: "building",
   },
   {
-    title: "Regulatory & Compliance Services",
+    title: "Regulatory Services",
     description:
       "Regulatory compliance, licensing, approvals, advisory and representation.",
     slug: "regulatory-and-compliance",
+    canonicalSlug: "regulatory-services",
     icon: "shield",
   },
   {

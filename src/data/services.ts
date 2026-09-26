@@ -10,7 +10,7 @@ const existing = (...titles: string[]): Capability[] => titles.map(title => ({ t
 // Shared capabilities are referenced under each relevant practice, not renamed.
 const mappings: Capability[][] = [
  family(0),
- [...family(1), ...family(13), ...family(14), ...select(2, 4)],
+ family(1),
  existing("Customs Advisory", "Excise Advisory", "Trade Advisory", "Compliance Support"),
  [...family(3), ...select(2, 0, 5)],
  family(4), family(5), family(6),
@@ -55,6 +55,8 @@ export const services = identities.map((service, index) => ({
  image: `/images/services/${service.slug}.webp`,
  category: filters[index],
  subServices: mappings[index],
+ // Preserve discovery of adjacent technology and specialist dispute capabilities.
+ relatedCapabilities: index === 1 ? [...family(13), ...family(14), ...select(2, 4)] : [],
  highlights: mappings[index].slice(0, 4).map(group => group.title),
 }));
 export type Service = (typeof services)[number];

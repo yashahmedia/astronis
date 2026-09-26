@@ -11,7 +11,7 @@ assert.equal(services.length,21);
 assert.equal(new Set(services.map(s=>s.slug)).size,21);
 assert.deepEqual(services.map(s=>[s.title,s.slug]),practices.map(s=>[s.title,s.slug]));
 assert.deepEqual(serviceFormConfig.map(s=>s.label),services.map(s=>s.title));
-const capabilities=services.flatMap(s=>s.subServices);
+const capabilities=services.flatMap(s=>[...s.subServices,...s.relatedCapabilities]);
 for(const family of hierarchy) for(const group of family.subServices) {
   assert(capabilities.some(c=>c.title===group.title && JSON.stringify(c.children)===JSON.stringify(group.children)),`Missing workbook group: ${group.title}`);
 }

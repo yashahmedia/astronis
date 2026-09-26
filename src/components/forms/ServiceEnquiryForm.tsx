@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import styles from "@/components/forms/formStyles.module.css";
 import FormInput from "@/components/forms/shared/FormInput";
 import FormSelect from "@/components/forms/shared/FormSelect";
 import FormTextarea from "@/components/forms/shared/FormTextarea";
 import PhoneInput from "@/components/forms/shared/PhoneInput";
+import { serviceAnchor } from "@/data/service-detail-types";
 import { serviceFormConfig } from "@/data/serviceFormConfig";
 
 const countryOptions = [
@@ -70,6 +71,19 @@ export default function ServiceEnquiryForm({ defaultService = "", defaultRequire
     () => serviceConfig?.requirements.find((requirement) => requirement.label === form.requirement) ?? null,
     [form.requirement, serviceConfig],
   );
+
+  useEffect(() => {
+    const options = serviceFormConfig.find(service => service.label === resolvedService)?.requirements.find(item => item.label === resolvedRequirement)?.options || [];
+    const select = (title: string) => {
+      if (options.includes(title)) setForm(current => current.service === resolvedService && current.requirement === resolvedRequirement ? {...current, detailQuestion: "Child service", detailAnswer: title} : current);
+    };
+    const fromHash = () => { const child = options.find(title => serviceAnchor(title) === window.location.hash.slice(1)); if (child) select(child); };
+    const fromClick = (event: Event) => { const title = (event as CustomEvent<unknown>).detail; if (typeof title === "string") select(title); };
+    fromHash();
+    window.addEventListener("hashchange", fromHash);
+    window.addEventListener("service-requirement", fromClick);
+    return () => { window.removeEventListener("hashchange", fromHash); window.removeEventListener("service-requirement", fromClick); };
+  }, [resolvedService, resolvedRequirement]);
 
   const updateField = (field: keyof typeof form, value: string | boolean) => {
     if (field === "service") {

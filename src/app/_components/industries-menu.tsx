@@ -72,11 +72,12 @@ export default function IndustriesMenu({ id, onNavigate }: { id: string; onNavig
         <span><Icon name="globe" /><strong>{industries.length}</strong> Industry Verticals</span>
         <span><Icon name="people" /><strong>Multi-sector</strong> Advisory Expertise</span>
         <span><Icon name="shield" /><strong>Trusted Partner</strong> Since 2015</span>
-        <Link href="/contact" onClick={onNavigate}>Complex industries. Practical solutions. <Icon name="arrow" /></Link>
+        <span className={styles.footerStatement}>Complex industries.<br />Practical solutions.</span>
       </div>
     </div>
     <aside className={styles.sidebar} aria-label="Find your industry">
-      <h2>Find Your Industry</h2>
+      <span className={styles.sidebarEyebrow}>SECTOR INTELLIGENCE</span>
+      <h2>Find Your<br /><em>Industry.</em></h2>
       <p>Search industries, sectors or keywords</p>
       <div className={styles.search}><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search industries or sectors..." aria-label="Search industries in menu" /><Icon name="search" /></div>
       <div className={styles.quickLinks}>
@@ -86,7 +87,7 @@ export default function IndustriesMenu({ id, onNavigate }: { id: string; onNavig
         <Link href="/professionals" onClick={onNavigate} className={isRouteActive(pathname, "/professionals") ? "active-submenu-item" : undefined}><Icon name="search" /><span><strong>Find a Professional</strong><small>Connect with our experts</small></span><Icon name="arrow" /></Link>
       </div>
       <Link className={styles.contact} href="/contact" onClick={onNavigate}><Icon name="mail" /><span><strong>Discuss Your Industry Requirement</strong><small>Get tailored advisory support</small></span><Icon name="arrow" /></Link>
-      <div className={styles.sidebarBottom}><span>GLOBAL PERSPECTIVE.<br />INDUSTRY FOCUS.</span></div>
+      <div className={styles.sidebarBottom}><Icon name="globe" /><span>GLOBAL PERSPECTIVE.<br /><strong>Industry focus.</strong></span></div>
     </aside>
   </div>;
 }

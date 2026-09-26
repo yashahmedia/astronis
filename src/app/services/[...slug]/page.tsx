@@ -56,7 +56,7 @@ export async function generateMetadata({
   if (detailed) {
     const {practice, group} = detailed;
     return {
-      title: {absolute:`${group?.title || practice.title} Services | Astronis`},
+      title: {absolute:(group ? group.seoTitle : practice.seoTitle) || `${group?.title || practice.title} Services | Astronis`},
       description: group?.description || practice.description,
       alternates: {canonical:group ? groupPath(practice,group) : practicePath(practice)},
     };

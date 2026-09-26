@@ -10,7 +10,7 @@ export function ChildServiceList({ practice, group }: { practice: ServicePractic
 }
 
 export default function ServiceGroupSection({ practice, group, index }: { practice: ServicePractice; group: DetailedServiceGroup; index: number }) {
-  return <section id={group.slug} className={`${styles.groupSection} ${index % 2 ? styles.reverse : ""} ${index === 3 ? styles.darkSection : ""}`} aria-labelledby={`${group.slug}-heading`}>
+  return <section id={group.slug} className={`${styles.groupSection} ${index % 2 ? styles.reverse : ""} ${index === (practice.darkGroupIndex ?? 3) ? styles.darkSection : ""}`} aria-labelledby={`${group.slug}-heading`}>
     <div className={`container ${styles.groupGrid}`}>
       <div className={styles.groupCopy}><div className={styles.groupMeta}><span className={styles.groupNumber}>{String(index + 1).padStart(2,"0")} <span>/ {String(practice.groups.length).padStart(2,"0")}</span></span><div className={styles.groupIcon}><Icon name={group.icon} /></div></div><h2 id={`${group.slug}-heading`} tabIndex={-1}>{group.title}</h2><p className={styles.groupDescription}>{group.description}</p><p>{group.introduction}</p><ServiceButton href={groupPath(practice,group)}>{group.cta}</ServiceButton><div className={styles.groupImage}><Image src={group.image} alt="" fill sizes="(max-width: 900px) 100vw, 45vw" /></div></div>
       <ChildServiceList practice={practice} group={group} />

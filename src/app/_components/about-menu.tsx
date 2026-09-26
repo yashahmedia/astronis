@@ -27,7 +27,7 @@ const columns = [
 ] as const;
 
 const quickLinks = [
-  ["trophy", "Our Achievements", "Milestones that inspire us", "/about"],
+  ["trophy", "Our Achievements", "Milestones that inspire us", "/about/our-story#milestones-title"],
   ["people", "Join Our Team", "Build a rewarding career", "/about/careers"],
   ["file", "Latest Insights", "News, updates and thought leadership", "/insights"],
   ["message", "Get in Touch", "Start a conversation with our team", "/contact"],
@@ -45,6 +45,6 @@ export default function AboutMenu({ id, onNavigate }: { id: string; onNavigate: 
         <div className={styles.stats}><div><strong>11+</strong><span>Years<br />of Experience</span></div><div><strong>1000+</strong><span>Advisory<br />Assignments</span></div><div><strong>30+</strong><span>Countries<br />in Network</span></div></div>
       </aside>
     </div>
-    <div className={styles.footer}>{quickLinks.map(([icon, title, description, href]) => <Link href={href} onClick={onNavigate} key={title} className={isRouteActive(pathname, href) ? "active-submenu-item" : undefined}><Icon name={icon} /><span><strong>{title}</strong><small>{description}</small></span></Link>)}</div>
+    <div className={styles.footer}>{quickLinks.map(([icon, title, description, href]) => <Link href={href} onClick={onNavigate} key={title} aria-current={isRouteActive(pathname, href.split("#")[0]) ? "page" : undefined}><span className={styles.quickIcon}><Icon name={icon} /></span><span className={styles.quickCopy}><strong>{title}</strong><small>{description}</small></span><span className={styles.quickArrow} aria-hidden="true"><Icon name="arrow" /></span></Link>)}</div>
   </div>;
 }

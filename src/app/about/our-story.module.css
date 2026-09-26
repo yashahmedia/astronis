@@ -266,3 +266,5 @@
 .page .darkCollection .card { background: linear-gradient(145deg, #173c60, #0b2541); border-color: #6d9bc045; }
 @media (max-width: 1100px) { .page .purpose { grid-template-columns: 1fr; } .page .compass { min-height: 260px; } .page .values ul { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (max-width: 600px) { .page .values ul { grid-template-columns: repeat(2, minmax(0, 1fr)); } .page .impact dl { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.journey h2 { scroll-margin-top: 170px; }

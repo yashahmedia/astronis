@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "../../_components/asset-image";
 import Icon from "../../_components/icon";
 import { practicePath, type ServicePractice, type DetailedServiceGroup } from "@/data/service-detail-types";
+import RegulatoryEcosystem from "./regulatory-ecosystem";
 import Breadcrumbs from "./breadcrumbs";
 import styles from "./service-template.module.css";
 
@@ -17,17 +18,17 @@ export default function ServiceHero({ practice, group }: { practice: ServicePrac
       <Breadcrumbs items={[{title:"Home",href:"/"},{title:"Services",href:"/services"},{title:practice.title,...(group ? {href:practicePath(practice)} : {})},...(group ? [{title:group.title}] : [])]} />
       <div className={styles.heroGrid}>
         <div className={styles.heroCopy}>
-          <span className={styles.eyebrow}>{group ? practice.title : "STRUCTURE. DIRECTION. CONTINUITY."}</span>
+          <span className={styles.eyebrow}>{group ? practice.title : practice.heroEyebrow || "STRUCTURE. DIRECTION. CONTINUITY."}</span>
           <h1>{group?.title || practice.title}</h1>
           {!group && <p className={styles.heroStatement}>{practice.heroStatement}</p>}
           <p>{group?.description || practice.description}</p>
           <div className={styles.actions}><ServiceButton href="#enquiry">Speak With an Advisor</ServiceButton><ServiceButton href={group ? `#${group.children[0].slug}` : "#service-groups"} secondary>{group ? "Explore Services" : "Explore Our Capabilities"}</ServiceButton></div>
         </div>
-        {!group && <div className={styles.lifecycle} aria-label="Business lifecycle">
+        {!group && (practice.visual === "regulatory" ? <RegulatoryEcosystem stages={practice.lifecycle} /> : <div className={styles.lifecycle} aria-label="Business lifecycle">
           <div className={styles.lifecycleHeading}><span>THE BUSINESS LIFECYCLE</span><strong>Connected decisions.<br /><em>Lasting foundations.</em></strong></div>
           <ol>{practice.lifecycle.map((stage, index) => <li key={stage}><span>{String(index + 1).padStart(2,"0")}</span><strong>{stage}</strong><Icon name="arrow" /></li>)}</ol>
           <p>One advisory perspective, through every stage.</p>
-        </div>}
+        </div>)}
       </div>
       <div className={styles.badges}>{badges.map(badge => <span key={badge}>{badge}</span>)}</div>
     </div>

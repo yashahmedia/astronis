@@ -279,3 +279,15 @@
 @media(max-width:1000px) { .expertsHeading { align-items:flex-start; flex-direction:column; gap:22px; } .expertsGrid { grid-template-columns:repeat(2,minmax(0,1fr)); } .expertsNote { flex-wrap:wrap; } .expertsNote>a { margin-left:45px; } }
 @media(max-width:639px) { .experts { padding:50px 0; } .expertsGrid { grid-template-columns:1fr; gap:23px; } .expertBody { padding:24px; } .expertBody h3 { font-size:26px; } .expertsNote p { flex:1; } }
 @media(prefers-reduced-motion:reduce) { .expertCard:hover,.expertCard:hover .expertPhoto img { transform:none; } .expertCard:hover .expertPhotoArrow svg { transform:rotate(-35deg); } }
+
+/* Regulatory illustration uses the shared hero's typography, borders and palette. */
+.regulatoryEcosystem { background:linear-gradient(135deg,#21496c75,#071f39b0),repeating-linear-gradient(90deg,transparent 0 39px,#acc6df0a 40px); }
+.regulatoryCore { display:flex; align-items:center; gap:15px; position:relative; margin:24px 0 0; padding:20px; border:1px solid #d7b77d80; background:#173a5e; }
+.regulatoryCore:after { content:""; position:absolute; top:100%; left:50%; height:23px; border-left:1px solid #d7b77d80; }
+.regulatoryCore>svg { width:32px; height:32px; color:#e5bd78; }
+.regulatoryCore small { display:block; font-size:8px; letter-spacing:1.5px; color:#b1c9de; margin-bottom:5px; }
+.regulatoryCore strong { font:400 23px/1.2 Georgia,serif; }
+.regulatoryEcosystem li:last-child { grid-column:auto; }
+.regulatoryEcosystem li>span svg { width:13px; height:13px; }
+
+.finalActions { justify-content:center; }

@@ -1,4 +1,5 @@
 import { services } from "./services";
+import { regulatoryServices } from "./regulatory-practice";
 import { formationContent } from "./corporate-formation-content";
 import { structuringContent, transactionContent, governanceContent, contractContent, restructuringContent } from "./corporate-group-content";
 import { serviceAnchor, type ServicePractice } from "./service-detail-types";
@@ -92,7 +93,7 @@ export const corporateCommercial: ServicePractice = {
   expertSlugs: ["krishna-kumar-mishra", "krishna-nand-mishra", "puneet-kumar-verma"],
 };
 
-export const servicePractices: ServicePractice[] = [corporateCommercial];
+export const servicePractices: ServicePractice[] = [corporateCommercial, regulatoryServices];
 export function resolvePractice(slugs: string[]) {
   if (slugs.length > 2) return null;
   const practice = servicePractices.find(item => item.slug === slugs[0]);

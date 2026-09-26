@@ -24,7 +24,7 @@ const normalize = (value: string) => value.toLowerCase().replace(/m\s*&\s*a/g, "
 export function matchesService(service: Service, query: string, category: string) {
   const index = Number(service.number) - 1;
   if (category !== "All" && !facets[index].includes(category)) return false;
-  const searchable = normalize([service.title, service.shortDescription, ...service.subServices.flatMap(group => [group.title, ...group.children])].join(" "));
+  const searchable = normalize([service.title, service.shortDescription, ...[...service.subServices, ...service.relatedCapabilities].flatMap(group => [group.title, ...group.children])].join(" "));
   const tokens = normalize(query).split(/\s+/).filter(token => token && token !== "and");
   return tokens.every(token => searchable.includes(token));
 }
