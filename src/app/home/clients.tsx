@@ -8,6 +8,7 @@ export default function Clients() {
         <Heading
           title="Our Esteemed Clients"
           text="Trusted by Businesses & Professionals."
+          light
         />
         <ClientLogoGrid limit={8} />
         <div className="clients-preview-action">
