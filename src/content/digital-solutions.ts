@@ -1,11 +1,18 @@
 export const digitalBusinessPath = "/technology-and-digital-solutions/digital-business-solutions";
 export const clientEnterprisePortalsPath = "/technology-and-digital-solutions/client-enterprise-portals";
 export const cybersecurityReadinessPath = "/technology-and-digital-solutions/cybersecurity-data-protection/cybersecurity-readiness";
+export const cloudCollaborationPath = "/technology-and-digital-solutions/cloud-and-collaboration";
 
 export const digitalBusinessInsights = [
   { category: "Business transformation", title: "Digital transformation in modern enterprises", image: "/images/india-presence/mumbai.jpg", href: "/insights/business-updates" },
   { category: "Regulatory intelligence", title: "Explore the next chapter of RegTech", image: "/FinTech & Digital Finance .png", href: "/insights/legal-updates" },
   { category: "Digital resilience", title: "Cybersecurity and business resilience", image: "/Technology, IT & ITES .png", href: "/insights/articles" },
+] as const;
+
+export const cloudCollaborationInsights = [
+  { date: "10 Sep 2026", title: "Cloud Adoption in India – Trends, Opportunities and Challenges", image: "/Technology&Digital/Banner- Cloud & Digital Infrastructure .png", href: "/insights/articles" },
+  { date: "05 Sep 2026", title: "Building a Secure Hybrid Cloud Strategy for Regulated Industries", image: "/Technology&Digital/Banner- Cloud & Digital Infrastructure .png", href: "/insights/business-updates" },
+  { date: "18 Aug 2026", title: "Green IT: Creating Sustainable Infrastructure for the Future", image: "/nergy, Power & Renewables .png", href: "/insights/legal-updates" },
 ] as const;
 
 export const digitalSolutions = [

@@ -4,14 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Icon from "./icon";
 import styles from "./technology-menu.module.css";
-import { clientEnterprisePortalsPath, cybersecurityReadinessPath, digitalBusinessPath, digitalSolutions } from "@/content/digital-solutions";
+import { clientEnterprisePortalsPath, cloudCollaborationPath, cybersecurityReadinessPath, digitalBusinessPath, digitalSolutions } from "@/content/digital-solutions";
 import { regtechPath, regtechSolutions } from "@/content/regtech-solutions";
 import { legalTechnologyPath, legalTechnologySolutions } from "@/content/legal-technology";
 import { dataAiPath, dataAiSolutions } from "@/content/data-ai-solutions";
 import { isRouteActive } from "./navigation-state";
 
 const columns = [
-  { title: "Digital Business Solutions", icon: "laptop", links: ["Digital Transformation", "Business Process Digitisation", "Digital Operating Models", "Workflow Solutions", "Client & Enterprise Portals", "Cloud & Collaboration Solutions"] },
+  { title: "Digital Business Solutions", icon: "laptop", links: ["Digital Transformation", "Business Process Digitisation", "Digital Operating Models", "Workflow Solutions", "Client & Enterprise Portals", "Cloud & Collaboration"] },
   { title: "Cybersecurity & Data Protection", icon: "shield", links: ["Cybersecurity Readiness"] },
   { title: "RegTech & Compliance Technology", icon: "shield", links: ["Compliance Management", "Regulatory Monitoring & Alerts", "Compliance Calendar", "Licensing & Approval Tracking", "Policy & Regulatory Intelligence", "Risk & Governance Technology", "ESG & Sustainability Tools"] },
   { title: "Legal Technology", icon: "file", links: ["Contract Lifecycle Management", "Document Management", "Matter / Case Management", "Legal Workflow Automation", "e-Discovery & Evidence Management", "Knowledge Management", "AI-Assisted Legal Research"] },
@@ -41,7 +41,7 @@ const descriptions: Record<string, string> = {
   "Workflow Solutions": "Streamline everyday tasks.",
   "Client & Enterprise Portals": "Connect teams and clients.",
   "Cybersecurity & Data Protection": "Assess posture and strengthen resilience.",
-  "Cloud & Collaboration Solutions": "Work together securely.",
+  "Cloud & Collaboration": "Work together securely.",
   "Cybersecurity Readiness": "Prepare for cyber threats.",
   "Compliance Management": "Track your obligations.",
   "Regulatory Monitoring & Alerts": "Stay ahead of changes.",
@@ -75,6 +75,7 @@ const descriptions: Record<string, string> = {
 
 function solutionHref(title: string) {
   if (title === "Client & Enterprise Portals") return clientEnterprisePortalsPath;
+  if (title === "Cloud & Collaboration" || title === "Cloud & Collaboration Solutions") return cloudCollaborationPath;
   if (title === "Cybersecurity & Data Protection" || title === "Cybersecurity Readiness") return cybersecurityReadinessPath;
   if (title === "Data, AI & Automation") return dataAiPath;
   const dataSolution = dataAiSolutions.find((solution) => solution.title === title);

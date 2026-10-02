@@ -108,7 +108,7 @@ export async function POST(request: Request) {
   }
 
   const validateCommon = () => {
-    const isCompactTechnologyEnquiry = fields.formType === "technology" && ["Client & Enterprise Portals", "Cybersecurity Readiness"].includes(fields.solution);
+    const isCompactTechnologyEnquiry = fields.formType === "technology" && ["Client & Enterprise Portals", "Cybersecurity Readiness", "Cloud & Collaboration Solutions"].includes(fields.solution);
     if (!fields.name.trim()) return "Please enter your name.";
     if (fields.name.trim().length < 2 || fields.name.trim().length > 120) return "Please enter your name.";
     if (!fields.email.trim()) return "Please enter a valid email address.";

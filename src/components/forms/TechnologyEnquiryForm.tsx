@@ -108,7 +108,7 @@ export default function TechnologyEnquiryForm({
     if (busy) return;
 
     const nextErrors: Record<string, string> = {};
-    const isOptionalCompactEnquiry = compact && ["Client & Enterprise Portals", "Cybersecurity Readiness"].includes(form.solution);
+    const isOptionalCompactEnquiry = compact && ["Client & Enterprise Portals", "Cybersecurity Readiness", "Cloud & Collaboration Solutions"].includes(form.solution);
     if (!form.fullName.trim()) nextErrors.fullName = "Please enter your full name.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.businessEmail.trim())) nextErrors.businessEmail = "Please enter your business email.";
     if (!isOptionalCompactEnquiry && !form.phone.trim()) nextErrors.phone = "Please enter your phone or WhatsApp number.";
