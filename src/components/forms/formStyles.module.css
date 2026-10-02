@@ -7,6 +7,25 @@
   padding: clamp(1.25rem, 2vw, 2rem);
 }
 
+.compact {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.compact .form { gap: 0.55rem; }
+.compact .grid { gap: 0.5rem 0.65rem; }
+.compact .field,
+.compact .fieldLabel { gap: 0.25rem; font-size: 0.72rem; }
+.compact .input,
+.compact .select,
+.compact .textarea { min-height: 32px; padding: 0.35rem 0.5rem; border-radius: 2px; font-size: 0.75rem; }
+.compact .textarea { min-height: 54px; }
+.compact .inline { gap: 0.5rem; padding-top: 0; }
+.compact .inlineText { font-size: 0.7rem; }
+.compact .button { min-height: 34px; justify-self: start; padding: 0.45rem 0.8rem; border-radius: 2px; }
+
 .header {
   margin-bottom: 1.25rem;
 }

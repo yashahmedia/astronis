@@ -47,10 +47,13 @@ const inferTechnologyAreaFromPath = (pathname: string) => {
 export default function TechnologyEnquiryForm({
   defaultSolutionArea = "",
   defaultSolution = "",
+  variant = "default",
 }: {
   defaultSolutionArea?: string;
   defaultSolution?: string;
+  variant?: "default" | "compact";
 }) {
+  const compact = variant === "compact";
   const pathname = usePathname();
   const resolvedArea = defaultSolutionArea || inferTechnologyAreaFromPath(pathname || "");
   const [form, setForm] = useState({
@@ -105,13 +108,14 @@ export default function TechnologyEnquiryForm({
     if (busy) return;
 
     const nextErrors: Record<string, string> = {};
+    const isOptionalCompactEnquiry = compact && ["Client & Enterprise Portals", "Cybersecurity Readiness"].includes(form.solution);
     if (!form.fullName.trim()) nextErrors.fullName = "Please enter your full name.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.businessEmail.trim())) nextErrors.businessEmail = "Please enter your business email.";
-    if (!form.phone.trim()) nextErrors.phone = "Please enter your phone or WhatsApp number.";
+    if (!isOptionalCompactEnquiry && !form.phone.trim()) nextErrors.phone = "Please enter your phone or WhatsApp number.";
     if (!form.company.trim()) nextErrors.company = "Please enter your company or organisation.";
     if (!form.solutionArea) nextErrors.solutionArea = "Please select a solution area.";
     if (!form.country) nextErrors.country = "Please select your country.";
-    if (!form.requirementDetails.trim()) nextErrors.requirementDetails = "Please describe your requirement.";
+    if (!isOptionalCompactEnquiry && !form.requirementDetails.trim()) nextErrors.requirementDetails = "Please describe your requirement.";
     if (!form.consent) nextErrors.consent = "Please confirm consent before submitting.";
 
     setErrors(nextErrors);
@@ -168,14 +172,14 @@ export default function TechnologyEnquiryForm({
   };
 
   return (
-    <div id="technology-enquiry" className={styles.formShell}>
-      <div className={styles.header}>
+    <div id="technology-enquiry" className={`${styles.formShell} ${compact ? styles.compact : ""}`.trim()}>
+      {!compact ? <div className={styles.header}>
         <span className={styles.eyebrow}>Technology enquiry</span>
         <h3 className={styles.title}>Discuss My Technology Requirement</h3>
         <p className={styles.description}>Tell us about your business challenge and we will connect you with the right specialist team.</p>
-      </div>
+      </div> : null}
 
-      {form.solutionArea ? (
+      {!compact && form.solutionArea ? (
         <div className={styles.selectionRow}>
           <span className={styles.selectedBadge}>Solution area: {form.solutionArea}</span>
           <button type="button" className={styles.textAction} onClick={() => updateField("solutionArea", "")}>Change</button>
@@ -184,6 +188,15 @@ export default function TechnologyEnquiryForm({
 
       <form className={styles.form} onSubmit={submit} noValidate>
         <div className={styles.grid}>
+          {compact ? <>
+            <FormInput id="technology-full-name" label="Your Name *" value={form.fullName} onChange={(event) => updateField("fullName", event.target.value)} error={errors.fullName} autoComplete="name" placeholder="Your name" />
+            <FormInput id="technology-company" label="Your Organisation *" value={form.company} onChange={(event) => updateField("company", event.target.value)} error={errors.company} autoComplete="organization" placeholder="Your organisation" />
+            <FormInput id="technology-business-email" label="Your Email *" type="email" value={form.businessEmail} onChange={(event) => updateField("businessEmail", event.target.value)} error={errors.businessEmail} autoComplete="email" placeholder="you@company.com" />
+            <PhoneInput id="technology-phone" label="Contact Number" value={form.phone} onChange={(event) => updateField("phone", event.target.value)} error={errors.phone} placeholder="Your contact number" />
+            <div className={styles.fullWidth}>
+              <FormTextarea id="technology-requirement" label="Your Message (Optional)" value={form.requirementDetails} onChange={(event) => updateField("requirementDetails", event.target.value)} error={errors.requirementDetails} placeholder="Tell us what you need from your portal." />
+            </div>
+          </> : <>
           <FormInput id="technology-full-name" label="Full Name *" value={form.fullName} onChange={(event) => updateField("fullName", event.target.value)} error={errors.fullName} autoComplete="name" placeholder="Your full name" />
           <FormInput id="technology-business-email" label="Business Email *" type="email" value={form.businessEmail} onChange={(event) => updateField("businessEmail", event.target.value)} error={errors.businessEmail} autoComplete="email" placeholder="you@company.com" />
           <PhoneInput id="technology-phone" label="Phone / WhatsApp *" value={form.phone} onChange={(event) => updateField("phone", event.target.value)} error={errors.phone} placeholder="+91 98765 43210" />
@@ -213,6 +226,7 @@ export default function TechnologyEnquiryForm({
           </div>
 
           <FormSelect id="technology-preferred-contact" label="Preferred Contact Method" value={form.preferredContact} onChange={(event) => updateField("preferredContact", event.target.value)} options={contactOptions} />
+          </>}
         </div>
 
         <label className={styles.inline} htmlFor="technology-consent">
@@ -222,7 +236,7 @@ export default function TechnologyEnquiryForm({
         {errors.consent ? <div className={styles.errorText}>{errors.consent}</div> : null}
 
         <button type="submit" className={styles.button} disabled={busy}>
-          {busy ? "Sending..." : "Discuss My Technology Requirement"}
+          {busy ? "Sending..." : compact ? "Submit Enquiry" : "Discuss My Technology Requirement"}
         </button>
 
         {status ? (

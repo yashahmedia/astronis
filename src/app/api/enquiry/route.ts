@@ -108,13 +108,14 @@ export async function POST(request: Request) {
   }
 
   const validateCommon = () => {
+    const isCompactTechnologyEnquiry = fields.formType === "technology" && ["Client & Enterprise Portals", "Cybersecurity Readiness"].includes(fields.solution);
     if (!fields.name.trim()) return "Please enter your name.";
     if (fields.name.trim().length < 2 || fields.name.trim().length > 120) return "Please enter your name.";
     if (!fields.email.trim()) return "Please enter a valid email address.";
     if (!emailRegex.test(fields.email) || fields.email.length > 254) return "Please enter a valid email address.";
-    if (!fields.phone.trim()) return "Please enter your phone number.";
-    if (!fields.message.trim()) return "Please provide more details about your enquiry.";
-    if (fields.message.trim().length < 10) return "Please provide more details about your enquiry.";
+    if (!isCompactTechnologyEnquiry && !fields.phone.trim()) return "Please enter your phone number.";
+    if (!isCompactTechnologyEnquiry && !fields.message.trim()) return "Please provide more details about your enquiry.";
+    if (!isCompactTechnologyEnquiry && fields.message.trim().length < 10) return "Please provide more details about your enquiry.";
     if (!fields.consent) return "Please accept the consent checkbox.";
     return null;
   };

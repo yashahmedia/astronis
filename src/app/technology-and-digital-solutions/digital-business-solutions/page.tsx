@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "../../_components/asset-image";
 import Icon from "../../_components/icon";
 import { professionals } from "../../professionals/leadership";
-import { digitalSolutions } from "@/content/digital-solutions";
+import { digitalBusinessInsights, digitalSolutions } from "@/content/digital-solutions";
 import Enquiry from "../enquiry";
 import styles from "./digital-business.module.css";
 
@@ -15,7 +15,7 @@ const challenges = [["file", "Manual & fragmented processes"], ["network", "Data
 const steps = [["Assess", "Understand your business needs"], ["Design", "Create tailored solutions"], ["Implement", "Deploy with minimal disruption"], ["Enable", "Train and build adoption"], ["Support", "Provide ongoing support and improvement"]];
 const sectors = [["building", "Banking & Financial Services", "financial-services"], ["gear", "Manufacturing", "manufacturing"], ["building", "Real Estate & Construction", "real-estate-and-construction"], ["shield", "Healthcare & Life Sciences", "healthcare-and-pharma"], ["laptop", "E-Commerce & Technology", "e-commerce"], ["rocket", "Startups & Emerging Businesses", "startups"]];
 const related = [["Regulatory & Compliance Advisory", "/services/regulatory-and-compliance"], ["Contract Management", "/services/corporate-advisory"], ["Data Protection & Privacy", "/services/regulatory-and-compliance/data-protection"], ["IT & Technology Advisory", "/industries/it-and-ites"], ["Risk & Governance", "/services/risk-governance-and-forensic-advisory"], ["Cybersecurity Legal Advisory", "/services/regulatory-and-compliance"]];
-const insights = [["Business transformation", "Digital transformation in modern enterprises", "/images/india-presence/mumbai.jpg", "/insights/business-updates"], ["Regulatory intelligence", "Explore the next chapter of RegTech", "/FinTech & Digital Finance .png", "/insights/legal-updates"], ["Digital resilience", "Cybersecurity and business resilience", "/Technology, IT & ITES .png", "/insights/articles"]];
+const insights = digitalBusinessInsights.map(({ category, title, image, href }) => [category, title, image, href] as const);
 const faqs = [
   ["How do you customise solutions for different industries?", "We start with your sector, business priorities, workflows and regulatory requirements. These inform a practical scope and roadmap, with the solution adapted to your teams and operating environment."],
   ["Can you integrate with our existing systems?", "We review your existing tools, data and integration options before recommending changes. Compatibility, migration needs and dependencies are assessed as part of the agreed scope."],

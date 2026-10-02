@@ -20,7 +20,7 @@
 .intro p { color: #626c91; font: 400 clamp(16px, 1.5vw, 23px)/1.3 "Segoe UI", Arial, sans-serif; }
 .motto { flex: none; border-left: 1px solid #4966aa; padding-left: 17px; font-size: 11px; line-height: 1.7; letter-spacing: 1.2px; text-transform: uppercase; }
 .main { display: grid; grid-template-columns: minmax(0, 1fr) 17.5%; }
-.columns { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 20px 12px 17px; }
+.columns { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); padding: 20px 12px 17px; }
 .column { min-width: 0; padding: 0 18px 12px; border-right: 1px solid #dbe7f6; }
 .column:last-child { border-right: 0; }
 .heading { display: flex; align-items: center; gap: 12px; min-height: 67px; padding-bottom: 15px; border-bottom: 1px solid #dbe7f6; }
